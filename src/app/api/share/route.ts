@@ -15,8 +15,8 @@ export async function POST(request: NextRequest) {
     .find((v): v is string => Boolean(v));
 
   const target = candidate
-    ? `/share?link=${encodeURIComponent(candidate)}`
-    : "/share?error=nolink";
+    ? `/app/capture?link=${encodeURIComponent(candidate)}`
+    : "/app/capture?error=nolink";
 
   return NextResponse.redirect(new URL(target, request.url), 303);
 }
@@ -31,8 +31,8 @@ export async function GET(request: NextRequest) {
   const parsed = link ? tryParseLink(link) : null;
 
   const target = parsed
-    ? `/share?link=${encodeURIComponent(parsed.url)}`
-    : "/share?error=nolink";
+    ? `/app/capture?link=${encodeURIComponent(parsed.url)}`
+    : "/app/capture?error=nolink";
 
   return NextResponse.redirect(new URL(target, request.url), 303);
 }

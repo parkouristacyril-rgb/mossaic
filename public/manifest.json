@@ -1,7 +1,7 @@
 {
-  "name": "Mosaic",
-  "short_name": "Mosaic",
-  "start_url": "/",
+  "name": "Mossaic",
+  "short_name": "Mossaic",
+  "start_url": "/app",
   "display": "standalone",
   "background_color": "#0A0812",
   "theme_color": "#7B2FF7",
