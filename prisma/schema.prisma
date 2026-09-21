@@ -4,7 +4,12 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // Pooled (pgbouncer) connection for the app at runtime — safe for the many
+  // short-lived connections serverless invocations open.
+  url       = env("DATABASE_URL")
+  // Direct, unpooled connection for schema operations (`prisma db push`,
+  // migrations), which pgbouncer cannot run reliably.
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 // ---------------------------------------------------------------------------
