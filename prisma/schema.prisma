@@ -1,0 +1,357 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Tenancy & people
+// ---------------------------------------------------------------------------
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+
+  members      Member[]
+  videos       Video[]
+  observations Observation[]
+  patterns     Pattern[]
+  ideaBatches  IdeaBatch[]
+  entities     Entity[]
+}
+
+enum MemberRole {
+  ADMIN
+  CONTRIBUTOR
+  VIEWER
+}
+
+model Member {
+  id             String     @id @default(cuid())
+  organizationId String
+  email          String
+  name           String
+  role           MemberRole @default(CONTRIBUTOR)
+  createdAt      DateTime   @default(now())
+  lastActiveAt   DateTime?
+
+  organization Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  observations Observation[]
+
+  @@unique([organizationId, email])
+  @@index([organizationId])
+}
+
+// ---------------------------------------------------------------------------
+// Videos
+// ---------------------------------------------------------------------------
+
+enum Platform {
+  TIKTOK
+  INSTAGRAM
+  YOUTUBE
+}
+
+/// Processing state of a video, driving what the pipeline and pattern engine
+/// are allowed to do with it.
+enum VideoStatus {
+  /// Queued, nothing fetched yet.
+  PENDING
+  /// Scraping + AI analysis currently running.
+  PROCESSING
+  /// Analysis finished and stats were complete enough to trust.
+  ANALYZED
+  /// Analysis finished but performance stats were incomplete — excluded from
+  /// pattern mining until a later re-fetch fills them in.
+  AWAITING_DATA
+  FAILED
+}
+
+model Video {
+  id             String   @id @default(cuid())
+  organizationId String
+  /// The platform's own id. Together with the platform this is what makes a
+  /// video unique — it is how we avoid paying to analyze the same clip twice.
+  externalId     String
+  platform       Platform
+  url            String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  status      VideoStatus @default(PENDING)
+  statusNote  String?
+  analyzedAt  DateTime?
+
+  creatorHandle    String?
+  creatorFollowers Int?
+  caption          String?
+  durationSeconds  Int?
+
+  organization Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  observations Observation[]
+  analysis     VideoAnalysis?
+  snapshots    PerformanceSnapshot[]
+  scores       VideoScore?
+  entityLinks  VideoEntity[]
+  evidence     PatternEvidence[]
+
+  @@unique([organizationId, platform, externalId])
+  @@index([organizationId, status])
+}
+
+/// What a human noticed. Many observations can point at one video — that is the
+/// whole point: several people reacting to the same clip is itself signal.
+model Observation {
+  id             String   @id @default(cuid())
+  organizationId String
+  videoId        String
+  memberId       String?
+  createdAt      DateTime @default(now())
+
+  /// Free-text answers. Null for bulk imports, which are analyzed objectively
+  /// without anyone reacting to them.
+  reaction       String?
+  firstImpression String?
+  whyItWorked    String?
+  source         ObservationSource @default(WORKSPACE)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  video        Video        @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  member       Member?      @relation(fields: [memberId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt])
+  @@index([videoId])
+}
+
+enum ObservationSource {
+  SHARE_SHEET
+  WORKSPACE
+  BULK_IMPORT
+}
+
+// ---------------------------------------------------------------------------
+// Analysis output
+// ---------------------------------------------------------------------------
+
+/// One row per video holding every AI-derived creative dimension. The original
+/// spreadsheet spread these across ~20 sheets; grouping them by the Gemini call
+/// that produces them keeps writes atomic and reads cheap.
+model VideoAnalysis {
+  id      String @id @default(cuid())
+  videoId String @unique
+
+  // Visual pass
+  hook              String?
+  pacing            String?
+  visualComposition String?
+  cameraWork        String?
+  sceneEnvironment  String?
+  subjectPeople     String?
+  objectProduct     String?
+
+  // Audio pass
+  voiceTone    String?
+  music        String?
+  soundDesign  String?
+  audioTriggers String?
+
+  // Language pass
+  onScreenText String?
+  spokenTopic  String?
+  captionStyle String?
+  intent       String?
+  sentiment    String?
+  emotionalArc String?
+  seoKeywords  String[] @default([])
+
+  /// Brand psychology axes, 0-100. Kept as JSON because the axis list is a
+  /// product decision that changes faster than a migration cycle.
+  brandPsychology Json?
+  /// Predicted likelihood of share / save / comment / purchase.
+  predictedTriggers Json?
+
+  /// Full raw model output, kept so prompt changes can be re-scored offline
+  /// without paying to re-analyze the video.
+  raw Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  video Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
+}
+
+/// Every performance pull is appended, never overwritten — that history is what
+/// makes "this pattern is fading" answerable.
+model PerformanceSnapshot {
+  id       String   @id @default(cuid())
+  videoId  String
+  fetchedAt DateTime @default(now())
+
+  playCount    Int?
+  diggCount    Int?
+  commentCount Int?
+  shareCount   Int?
+  collectCount Int?
+  authorFans   Int?
+
+  /// True when every field the scoring math needs was present in this pull.
+  complete Boolean @default(false)
+
+  video Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@index([videoId, fetchedAt])
+}
+
+model VideoScore {
+  id      String @id @default(cuid())
+  videoId String @unique
+
+  viralityIndex       Float
+  algorithmVerdict    String
+  distributionScore   Int
+  replicationOdds     Int
+  confidence          String
+  engagementRate      Float?
+  computedAt          DateTime @default(now())
+
+  video Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
+}
+
+// ---------------------------------------------------------------------------
+// Entities
+// ---------------------------------------------------------------------------
+
+enum EntityType {
+  BRAND
+  COMPETITOR
+  PRODUCT
+  RETAILER
+  PLATFORM
+  INGREDIENT
+  TOPIC
+  PERSON
+  PLACE
+}
+
+model Entity {
+  id             String     @id @default(cuid())
+  organizationId String
+  name           String
+  type           EntityType
+  createdAt      DateTime   @default(now())
+
+  organization Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  videoLinks   VideoEntity[]
+
+  @@unique([organizationId, name])
+  @@index([organizationId, type])
+}
+
+model VideoEntity {
+  videoId  String
+  entityId String
+  mentions Int    @default(1)
+
+  video  Video  @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  entity Entity @relation(fields: [entityId], references: [id], onDelete: Cascade)
+
+  @@id([videoId, entityId])
+  @@index([entityId])
+}
+
+// ---------------------------------------------------------------------------
+// Patterns
+// ---------------------------------------------------------------------------
+
+enum PatternStatus {
+  EMERGING
+  CONFIRMED
+  FADING
+}
+
+model Pattern {
+  id             String        @id @default(cuid())
+  organizationId String
+  name           String
+  description    String
+  status         PatternStatus @default(EMERGING)
+
+  /// 0-100. Rises with the amount of independent supporting evidence.
+  confidence     Int
+  /// Average engagement lift of videos carrying this pattern vs. the org average.
+  performanceLift Float?
+  recommendedActions String[] @default([])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  organization Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  evidence     PatternEvidence[]
+
+  @@unique([organizationId, name])
+  @@index([organizationId, status])
+}
+
+/// A pattern is only ever as good as the distinct videos backing it.
+model PatternEvidence {
+  id        String @id @default(cuid())
+  patternId String
+  videoId   String
+  /// How strongly this particular video exhibits the pattern, 0-100.
+  strength  Int
+  note      String?
+  createdAt DateTime @default(now())
+
+  pattern Pattern @relation(fields: [patternId], references: [id], onDelete: Cascade)
+  video   Video   @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@unique([patternId, videoId])
+  @@index([videoId])
+}
+
+// ---------------------------------------------------------------------------
+// Idea generation
+// ---------------------------------------------------------------------------
+
+model IdeaBatch {
+  id             String   @id @default(cuid())
+  organizationId String
+  createdAt      DateTime @default(now())
+
+  campaign   String
+  goal       String
+  audience   String?
+  product    String?
+  constraints String?
+  requested  Int      @default(10)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  ideas        VideoIdea[]
+
+  @@index([organizationId, createdAt])
+}
+
+model VideoIdea {
+  id      String @id @default(cuid())
+  batchId String
+
+  title         String
+  concept       String
+  hook          String?
+  lengthEstimate String?
+  predictedLift  String?
+  rationale      String?
+  /// Names of the patterns this idea was built from.
+  basedOnPatterns String[] @default([])
+
+  createdAt DateTime @default(now())
+
+  batch IdeaBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+
+  @@index([batchId])
+}
