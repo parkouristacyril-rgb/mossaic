@@ -21,33 +21,6 @@ export default function MarketingPage() {
   const [progressStep, setProgressStep] = useState(-1);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  // Reveal-on-scroll, count-ups, and pattern-bar fills.
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const reveals = root.querySelectorAll<HTMLElement>(".reveal");
-    if (reduce) {
-      reveals.forEach((el) => el.classList.add("in"));
-    } else {
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("in");
-              io.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.15 },
-      );
-      reveals.forEach((el) => io.observe(el));
-      return () => io.disconnect();
-    }
-  }, []);
-
   // Count-up the stat bar numbers once visible.
   useEffect(() => {
     const root = rootRef.current;
@@ -211,100 +184,8 @@ export default function MarketingPage() {
               An AI system that watches every video you make{" "}
               <span className="accent-mark">and remembers what worked.</span>
             </h1>
-            <p className="text-lg text-[var(--mist)] leading-relaxed max-w-lg mb-8">
-              Paste a link below and watch Mossaic read it live: patterns, entities, and performance signals, all matched against everything it already knows.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 mb-3">
-              <input id="demoUrl" type="text" placeholder="Paste a TikTok link, or leave blank to try a sample" className="demo-input flex-1 px-4 py-3.5 text-sm" />
-              <button onClick={runDemo} disabled={analyzing} className="px-6 py-3.5 rounded-[14px] font-medium btn-primary text-white whitespace-nowrap">
-                {analyzing ? "Analyzing…" : "Analyze video"}
-              </button>
-            </div>
-            <p className="font-mono text-[12px] text-[var(--mist-dim)]">No credit card required · Free to start · Try it right here, no signup</p>
           </div>
 
-          {/* Dashboard mockup */}
-          <div className="mock p-5 sm:p-6 reveal">
-            <div className="flex items-center justify-between mb-5">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full" style={{ background: analyzing ? "var(--violet-2)" : analyzed ? "var(--good)" : "var(--mist-dim)" }}></span>
-                <span className="font-mono text-[11px] text-[var(--mist)]">
-                  {analyzing ? "Reading video…" : analyzed ? "Analysis complete" : "Waiting for a video"}
-                </span>
-              </div>
-              <span className="font-mono text-[11px] text-[var(--mist-dim)]">TikTok · 0:22</span>
-            </div>
-
-            {analyzing && (
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-2">
-                  {[0, 1, 2, 3].map((i) => (
-                    <div key={i} className={`step-dot ${i < progressStep ? "done" : i === progressStep ? "active" : ""}`}></div>
-                  ))}
-                </div>
-                <p className="font-mono text-[12px] text-[var(--mist)]">{progressLabels[Math.max(0, progressStep)]}</p>
-              </div>
-            )}
-
-            <div className="flex gap-1 mb-6">
-              {(["overview", "patterns", "entities", "ideas"] as HeroTab[]).map((t) => (
-                <button key={t} className={`mock-tab ${heroTab === t ? "active" : ""}`} onClick={() => setHeroTab(t)}>
-                  {t[0].toUpperCase() + t.slice(1)}
-                </button>
-              ))}
-            </div>
-
-            {heroTab === "overview" && (
-              <div data-panel="overview">
-                <div className="flex items-center gap-5 mb-6">
-                  <div className="grade-ring" id="gradeRing"><div className="grade-ring-inner"><span className="font-display font-semibold text-lg" id="gradeNum">0</span></div></div>
-                  <div>
-                    <p className="font-display font-semibold text-base">3 known patterns matched</p>
-                    <p className="text-[var(--mist-dim)] text-[12.5px]">Screenshot Proof, Native UI Overlay +1 more</p>
-                  </div>
-                </div>
-                <div className="space-y-2.5">
-                  {[["Hook", 85], ["Pacing", 74], ["Audio", 61], ["Visual", 79]].map(([lbl, val]) => (
-                    <div className="score-row" key={lbl}>
-                      <span className="lbl">{lbl}</span>
-                      <div className="pattern-bar flex-1"><span data-target={val}></span></div>
-                      <span className="val" data-num={val}>0</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {heroTab === "patterns" && (
-              <div className="space-y-3">
-                {[["Screenshot Proof", 6, "94% match"], ["Native UI Overlay", 4, "87% match"], ["Pattern Interruption", 3, "71% match"]].map(([name, n, match]) => (
-                  <div key={name as string} className="flex items-center justify-between pill rounded-xl px-4 py-3">
-                    <div><p className="text-sm font-medium">{name}</p><p className="font-mono text-[11px] text-[var(--mist-dim)]">Detected in {n} videos</p></div>
-                    <span className="chip in">{match}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {heroTab === "entities" && (
-              <div>
-                <p className="font-mono text-[11px] text-[var(--mist-dim)] mb-3">ENTITIES DETECTED</p>
-                <div className="flex flex-wrap gap-2">
-                  {["brand · thehealthylab", "city · Prague", "category · Wellness", "product · matcha tonic", "website · thehealthylab.bs"].map((c) => (
-                    <span key={c} className="chip in">{c}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {heroTab === "ideas" && (
-              <div>
-                <p className="pill inline-block rounded-full px-3 py-1 font-mono text-[11px] text-[var(--mist)] mb-3">IDEA-004</p>
-                <p className="font-display font-semibold mb-2">&quot;The 6am reset, filmed in one continuous shot&quot;</p>
-                <p className="text-[var(--mist)] text-[13px] leading-relaxed">Uses: Screenshot Proof + Pattern Interruption. Hook at 0:00–0:02: phone screen lights up mid-scroll, cut to POV pouring…</p>
-              </div>
-            )}
-          </div>
         </div>
       </section>
 
@@ -321,7 +202,7 @@ export default function MarketingPage() {
       {/* HOW */}
       <section id="how" className="px-6 py-28">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mb-16 reveal">
+          <div className="max-w-2xl mb-16">
             <p className="font-mono text-[13px] text-[var(--violet-2)] mb-3">HOW MOSSAIC WORKS</p>
             <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">One loop that learns your channel.</h2>
             <p className="text-[var(--mist)] mt-4">Analyze what happened, discover what&apos;s repeating, create the next one, and feed the result back in. One memory connects every stage: your Creative DNA.</p>
@@ -333,13 +214,13 @@ export default function MarketingPage() {
               ["03", "Create", "Ask for a campaign. Get shot-by-shot concepts built from what's proven to work."],
               ["04", "Remember", "Every result feeds back in. The library gets sharper with every video, forever."],
             ].map(([num, title, body], i, arr) => (
-              <div key={num} className={`grid md:grid-cols-[100px_1fr] gap-4 md:gap-10 py-8 border-t ${i === arr.length - 1 ? "border-b" : ""} border-[var(--line)] reveal items-baseline`}>
+              <div key={num} className={`grid md:grid-cols-[100px_1fr] gap-4 md:gap-10 py-8 border-t ${i === arr.length - 1 ? "border-b" : ""} border-[var(--line)] items-baseline`}>
                 <p className="font-display text-5xl md:text-6xl font-light text-[var(--line-strong)] leading-none">{num}</p>
                 <div><h3 className="font-display text-xl font-semibold mb-2">{title}</h3><p className="text-[var(--mist)] text-sm leading-relaxed max-w-md">{body}</p></div>
               </div>
             ))}
           </div>
-          <p className="text-center font-mono text-[12px] text-[var(--mist-dim)] reveal">Creative DNA is the memory that connects every stage — it compounds, it never resets.</p>
+          <p className="text-center font-mono text-[12px] text-[var(--mist-dim)]">Creative DNA is the memory that connects every stage — it compounds, it never resets.</p>
         </div>
       </section>
 
@@ -348,27 +229,27 @@ export default function MarketingPage() {
       {/* FEATURES */}
       <section id="features" className="px-6 py-28">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mb-16 reveal">
+          <div className="max-w-2xl mb-16">
             <p className="font-mono text-[13px] text-[var(--violet-2)] mb-3">THE PLATFORM</p>
             <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">One growing intelligence layer, four ways in.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            <Link href="/app/patterns" className="card tile-hover p-8 md:col-span-2 reveal cursor-pointer">
+            <Link href="/app/patterns" className="card tile-hover p-8 md:col-span-2 cursor-pointer">
               <p className="font-mono text-[12px] text-[var(--mist-dim)] mb-4">PATTERN ENGINE</p>
               <h3 className="font-display text-2xl font-semibold mb-4">The mechanisms behind your best videos, named and scored.</h3>
               <p className="text-[var(--mist)] text-sm leading-relaxed max-w-md mb-2">Click through to the full library →</p>
             </Link>
-            <Link href="/app/entities" className="card tile-hover p-8 reveal cursor-pointer">
+            <Link href="/app/entities" className="card tile-hover p-8 cursor-pointer">
               <p className="font-mono text-[12px] text-[var(--mist-dim)] mb-4">ENTITY INTELLIGENCE</p>
               <h3 className="font-display text-xl font-semibold mb-4">Every brand, place, and face — indexed.</h3>
               <p className="text-[var(--mist)] text-sm leading-relaxed">Explore the entity graph →</p>
             </Link>
-            <Link href="/app/ideas" className="card tile-hover p-8 reveal cursor-pointer">
+            <Link href="/app/ideas" className="card tile-hover p-8 cursor-pointer">
               <p className="font-mono text-[12px] text-[var(--mist-dim)] mb-4">VIDEO IDEAS</p>
               <h3 className="font-display text-xl font-semibold mb-4">Concepts, not just insights.</h3>
               <p className="text-[var(--mist)] text-sm leading-relaxed">See a generated idea →</p>
             </Link>
-            <Link href="/app/insights" className="card tile-hover p-8 md:col-span-2 reveal cursor-pointer">
+            <Link href="/app/insights" className="card tile-hover p-8 md:col-span-2 cursor-pointer">
               <p className="font-mono text-[12px] text-[var(--mist-dim)] mb-4">PERFORMANCE HISTORY</p>
               <h3 className="font-display text-xl font-semibold mb-4">Every pull, kept — not overwritten.</h3>
               <p className="text-[var(--mist)] text-sm leading-relaxed max-w-md">View the performance dashboard →</p>
@@ -380,14 +261,14 @@ export default function MarketingPage() {
       {/* PRICING */}
       <section id="pricing" className="px-6 py-28 bg-[var(--ink-2)] border-y border-[var(--line)]">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mx-auto text-center mb-16 reveal">
+          <div className="max-w-2xl mx-auto text-center mb-16">
             <p className="font-mono text-[13px] text-[var(--violet-2)] mb-3">PRICING</p>
             <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-4">Start where you are. Grow into the platform.</h2>
             <p className="text-[var(--mist)]">Every plan builds the same Creative DNA. It just compounds faster the higher you go.</p>
           </div>
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Starter */}
-            <div className="card p-8 tile-hover reveal">
+            <div className="card p-8 tile-hover">
               <h3 className="font-display text-lg font-semibold mb-1">Starter</h3>
               <p className="text-[var(--mist-dim)] text-sm mb-6">For solo creators &amp; small brands</p>
               <p className="mb-6"><span className="font-display text-4xl font-semibold">€89</span><span className="text-[var(--mist-dim)] font-mono text-sm"> /month</span></p>
@@ -399,7 +280,7 @@ export default function MarketingPage() {
               </ul>
             </div>
             {/* Growth */}
-            <div className="card p-8 relative overflow-hidden lg:-translate-y-4 reveal" style={{ borderColor: "rgba(157,92,255,0.6)", boxShadow: "0 30px 60px -20px rgba(123,47,247,0.4)" }}>
+            <div className="card p-8 relative overflow-hidden lg:-translate-y-4" style={{ borderColor: "rgba(157,92,255,0.6)", boxShadow: "0 30px 60px -20px rgba(123,47,247,0.4)" }}>
               <div className="absolute top-0 right-0 px-4 py-1.5 rounded-bl-xl font-mono text-[11px]" style={{ background: "var(--violet)" }}>MOST POPULAR</div>
               <h3 className="font-display text-lg font-semibold mb-1">Growth</h3>
               <p className="text-[var(--mist-dim)] text-sm mb-6">For brands building a real strategy</p>
@@ -412,7 +293,7 @@ export default function MarketingPage() {
               </ul>
             </div>
             {/* Expert */}
-            <div className="card p-8 tile-hover reveal">
+            <div className="card p-8 tile-hover">
               <h3 className="font-display text-lg font-semibold mb-1">Expert</h3>
               <p className="text-[var(--mist-dim)] text-sm mb-6">For agencies running multiple brands</p>
               <p className="mb-6"><span className="font-display text-4xl font-semibold">€889</span><span className="text-[var(--mist-dim)] font-mono text-sm"> /month</span></p>
@@ -426,7 +307,7 @@ export default function MarketingPage() {
           </div>
 
           {/* Feature comparison */}
-          <div className="mt-16 reveal">
+          <div className="mt-16">
             <p className="text-center font-mono text-[12px] text-[var(--mist-dim)] mb-8">FULL FEATURE COMPARISON</p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm min-w-[640px]">
@@ -463,7 +344,7 @@ export default function MarketingPage() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-6 mt-16 reveal">
+          <div className="grid sm:grid-cols-3 gap-6 mt-16">
             <div><p className="font-medium mb-1">Can I switch plans anytime?</p><p className="text-[var(--mist)] text-sm">Yes — upgrade or downgrade whenever, prorated automatically.</p></div>
             <div><p className="font-medium mb-1">What happens if I go over my video limit?</p><p className="text-[var(--mist)] text-sm">We&apos;ll notify you before you hit the cap so you can upgrade — no surprise charges.</p></div>
             <div><p className="font-medium mb-1">Is there an annual discount?</p><p className="text-[var(--mist)] text-sm">Yes, annual billing saves roughly 2 months compared to paying monthly.</p></div>
@@ -474,11 +355,11 @@ export default function MarketingPage() {
       {/* FAQ */}
       <section id="faq" className="px-6 py-28">
         <div className="max-w-3xl mx-auto">
-          <div className="mb-12 reveal">
+          <div className="mb-12">
             <p className="font-mono text-[13px] text-[var(--violet-2)] mb-3">FAQ</p>
             <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">Common questions.</h2>
           </div>
-          <div className="reveal">
+          <div>
             {faqs.map((f, i) => (
               <div key={f.q} className={`faq-item ${openFaq === i ? "open" : ""}`}>
                 <button className="faq-q" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
@@ -497,7 +378,7 @@ export default function MarketingPage() {
         <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
           <div className="w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--violet), transparent 70%)", filter: "blur(40px)" }}></div>
         </div>
-        <div className="relative max-w-2xl mx-auto reveal">
+        <div className="relative max-w-2xl mx-auto">
           <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight mb-6">Stop guessing what will work.</h2>
           <p className="text-[var(--mist)] mb-10">Drop in a video. Get patterns, evidence, and a next idea already backed by data.</p>
           <Link href="/login" className="inline-block px-8 py-4 rounded-full font-medium btn-primary text-white">Start Free</Link>

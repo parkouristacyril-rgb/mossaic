@@ -25,8 +25,6 @@
   .btn-ghost:hover{ border-color: rgba(157,92,255,0.55); background: rgba(123,47,247,0.08);}
   .card{ background: rgba(20,16,32,0.68); backdrop-filter: blur(20px); border:1px solid var(--line); border-radius: 20px; transition: border-color .25s, transform .25s; }
   .card:hover{ border-color: rgba(157,92,255,0.25); }
-  .reveal{ clip-path: inset(0 0 100% 0); transition: clip-path .7s cubic-bezier(.65,0,.15,1);}
-  .reveal.in{ clip-path: inset(0 0 0% 0);}
   .nav-blur{ backdrop-filter: blur(14px); background: rgba(10,8,18,0.55); border-bottom:1px solid var(--line);}
   .tile-hover{ transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s ease;}
   .tile-hover:hover{ transform: translateY(-5px); border-color: rgba(157,92,255,0.5);}
@@ -89,8 +87,7 @@
   .stat-num{ font-variant-numeric: tabular-nums; }
 
   @media (prefers-reduced-motion: reduce){
-    .reveal, .tile-hover{ transition:none !important; }
-    .reveal{ clip-path: inset(0 0 0% 0) !important; }
+    .tile-hover{ transition:none !important; }
   }
 
   /* ---- graphics additions ---- */
