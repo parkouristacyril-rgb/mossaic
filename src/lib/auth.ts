@@ -90,9 +90,11 @@ export function canWrite(session: SessionPayload): boolean {
  */
 export async function requireApiSession(options?: {
   write?: boolean;
+  admin?: boolean;
 }): Promise<SessionPayload | NextResponse> {
   const session = await getSession();
   if (!session) return unauthorized();
+  if (options?.admin && !hasRole(session, "ADMIN")) return forbidden();
   if (options?.write && !canWrite(session)) return forbidden();
   return session;
 }

@@ -5,22 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b984134-6043-4f44-9e59-f8959670609e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/seed.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/ideas/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/ideas/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/observations/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/observations/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/patterns/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/patterns/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/session/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/session/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/videos/[id]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/videos/[id]/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app/capture/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/capture/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app/ideas/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/ideas/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/explore/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/explore/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app/settings/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/settings/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app/videos/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/videos/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/env.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/org.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/org.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/auth.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +105,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1790495069251</updated>
-      <workItem from="1790495787165" duration="1857000" />
+      <workItem from="1790495787165" duration="3182000" />
     </task>
     <servers />
   </component>
