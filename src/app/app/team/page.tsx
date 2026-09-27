@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { currentOrganization } from "@/lib/org";
-import InviteButton from "./InviteButton";
+import { getSession } from "@/lib/auth";
+import AddMemberForm from "./AddMemberForm";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +26,8 @@ function timeAgo(date: Date | null) {
 
 export default async function TeamPage() {
   const org = await currentOrganization();
+  const session = await getSession();
+  const isAdmin = session?.role === "ADMIN";
   const members = await db.member.findMany({
     where: { organizationId: org.id },
     include: { _count: { select: { observations: true } } },
@@ -67,7 +70,11 @@ export default async function TeamPage() {
           </table>
         )}
       </div>
-      <InviteButton />
+      {isAdmin ? (
+        <AddMemberForm />
+      ) : (
+        <p className="font-mono text-[11px] text-[var(--mist-dim)] mt-5">Only workspace admins can add teammates.</p>
+      )}
     </div>
   );
 }

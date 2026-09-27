@@ -147,7 +147,7 @@ export default function MarketingPage() {
           </div>
           <div className="flex items-center gap-3">
             <Link href="/login" className="hidden sm:inline-block px-4 py-2 rounded-full text-sm btn-ghost">Sign in</Link>
-            <Link href="/login" className="px-4 py-2 rounded-full text-sm font-medium btn-primary text-white">Start Free</Link>
+            <Link href="/signup" className="px-4 py-2 rounded-full text-sm font-medium btn-primary text-white">Start Free</Link>
           </div>
         </div>
       </nav>
@@ -272,7 +272,7 @@ export default function MarketingPage() {
               <h3 className="font-display text-lg font-semibold mb-1">Starter</h3>
               <p className="text-[var(--mist-dim)] text-sm mb-6">For solo creators &amp; small brands</p>
               <p className="mb-6"><span className="font-display text-4xl font-semibold">€89</span><span className="text-[var(--mist-dim)] font-mono text-sm"> /month</span></p>
-              <Link href="/login" className="block w-full text-center px-5 py-3 rounded-full btn-ghost text-sm font-medium mb-8">Start free trial</Link>
+              <Link href="/signup" className="block w-full text-center px-5 py-3 rounded-full btn-ghost text-sm font-medium mb-8">Start free trial</Link>
               <ul className="space-y-3 text-sm text-[var(--mist)]">
                 {["2 team seats", "150 videos analysed / month", "Full creative breakdown per video", "Read-only pattern library", "Performance history"].map((f) => (
                   <li key={f} className="flex gap-3"><CheckIcon /><span>{f}</span></li>
@@ -285,7 +285,7 @@ export default function MarketingPage() {
               <h3 className="font-display text-lg font-semibold mb-1">Growth</h3>
               <p className="text-[var(--mist-dim)] text-sm mb-6">For brands building a real strategy</p>
               <p className="mb-6"><span className="font-display text-4xl font-semibold">€289</span><span className="text-[var(--mist-dim)] font-mono text-sm"> /month</span></p>
-              <Link href="/login" className="block w-full text-center px-5 py-3 rounded-full btn-primary text-sm font-medium mb-8 text-white">Start free trial</Link>
+              <Link href="/signup" className="block w-full text-center px-5 py-3 rounded-full btn-primary text-sm font-medium mb-8 text-white">Start free trial</Link>
               <ul className="space-y-3 text-sm text-[var(--mist)]">
                 {["5 team seats", "800 videos analysed / month", "Everything in Starter", "Full pattern library + evidence", "AI-generated video ideas", "Entity & competitor tracking"].map((f) => (
                   <li key={f} className="flex gap-3"><CheckIcon /><span>{f}</span></li>
@@ -381,7 +381,7 @@ export default function MarketingPage() {
         <div className="relative max-w-2xl mx-auto">
           <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight mb-6">Stop guessing what will work.</h2>
           <p className="text-[var(--mist)] mb-10">Drop in a video. Get patterns, evidence, and a next idea already backed by data.</p>
-          <Link href="/login" className="inline-block px-8 py-4 rounded-full font-medium btn-primary text-white">Start Free</Link>
+          <Link href="/signup" className="inline-block px-8 py-4 rounded-full font-medium btn-primary text-white">Start Free</Link>
         </div>
       </section>
 

@@ -1,21 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import BgCanvas from "../app/BgCanvas";
 
-export default function LoginPage() {
-  return (
-    <Suspense fallback={null}>
-      <LoginForm />
-    </Suspense>
-  );
-}
-
-function LoginForm() {
+export default function SignupPage() {
   const router = useRouter();
-  const params = useSearchParams();
+  const [name, setName] = useState("");
+  const [organizationName, setOrganizationName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,35 +18,38 @@ function LoginForm() {
     e.preventDefault();
 
     const trimmedEmail = email.trim();
-    if (!trimmedEmail || !password) {
-      setError("Enter your email and password to continue.");
+    if (!name.trim() || !organizationName.trim() || !trimmedEmail || !password) {
+      setError("Fill in every field to create your workspace.");
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       setError("Enter a valid email address.");
       return;
     }
+    if (password.length < 8) {
+      setError("Use a password of at least 8 characters.");
+      return;
+    }
 
     setBusy(true);
     setError("");
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmedEmail, password }),
+        body: JSON.stringify({ name: name.trim(), organizationName: organizationName.trim(), email: trimmedEmail, password }),
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        setError(body.error ?? "Could not sign in. Try again.");
+        setError(body.error ?? "Could not create your workspace. Try again.");
         setBusy(false);
         return;
       }
-      // The session cookie is set by the server; go where they were headed.
-      const next = params.get("next");
-      router.push(next && next.startsWith("/app") ? next : "/app");
+      // Signup logs you straight in (session cookie set by the server).
+      router.push("/app");
       router.refresh();
     } catch {
-      setError("Network problem — could not sign in.");
+      setError("Network problem — could not create your workspace.");
       setBusy(false);
     }
   }
@@ -77,23 +73,31 @@ function LoginForm() {
               <img className="mark-media mark-anim" src="/mark-anim.webp" alt="" aria-hidden="true" />
             </div>
             <h1 className="login-wordmark">MOSSAIC</h1>
-            <p className="login-kicker">Creative intelligence for short-form video.</p>
+            <p className="login-kicker">Create your workspace in a minute.</p>
           </div>
 
           <div className="login-fields">
             <label className="lf">
-              <span>Email</span>
+              <span>Your name</span>
+              <input value={name} onChange={(e) => { setName(e.target.value); setError(""); }} type="text" placeholder="Jordan Reyes" autoComplete="name" />
+            </label>
+            <label className="lf">
+              <span>Workspace name</span>
+              <input value={organizationName} onChange={(e) => { setOrganizationName(e.target.value); setError(""); }} type="text" placeholder="Your brand or team" autoComplete="organization" />
+            </label>
+            <label className="lf">
+              <span>Work email</span>
               <input value={email} onChange={(e) => { setEmail(e.target.value); setError(""); }} type="text" placeholder="you@company.com" autoComplete="username" spellCheck={false} />
             </label>
             <label className="lf">
               <span>Password</span>
-              <input value={password} onChange={(e) => { setPassword(e.target.value); setError(""); }} type="password" placeholder="••••••••••" autoComplete="current-password" />
+              <input value={password} onChange={(e) => { setPassword(e.target.value); setError(""); }} type="password" placeholder="At least 8 characters" autoComplete="new-password" />
             </label>
             {error && <p className="login-error" role="alert" style={{ color: "var(--rose, #f87171)", fontSize: 13, margin: "-4px 0 0" }}>{error}</p>}
-            <button type="submit" disabled={busy} className="btn-primary login-go">{busy ? "Signing in…" : "Enter workspace"}</button>
+            <button type="submit" disabled={busy} className="btn-primary login-go">{busy ? "Creating…" : "Create workspace"}</button>
           </div>
 
-          <p className="login-foot">New to Mossaic? <Link href="/signup" style={{ color: "var(--violet-2)" }}>Create a workspace</Link>.</p>
+          <p className="login-foot">Already have a workspace? <Link href="/login" style={{ color: "var(--violet-2)" }}>Sign in</Link>.</p>
         </form>
       </div>
     </div>
