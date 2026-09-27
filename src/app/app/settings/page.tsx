@@ -39,7 +39,8 @@ export default function SettingsPage() {
   return (
     <div>
       <h1 className="font-serif text-4xl mb-2">Settings</h1>
-      <p className="text-[var(--mist)] mb-8">Manage your workspace and account preferences.</p>
+      <p className="text-[var(--mist)] mb-8">Manage your workspace and account preferences.{" "}
+        <span className="egg-stat">Fun fact<span className="egg-tooltip">The average scroll session lasts about 2.5 minutes before a person consciously puts their phone down — or doesn&apos;t</span></span> — you&apos;ve probably scrolled more today than you&apos;d like to admit.</p>
 
       <div className="grid lg:grid-cols-2 gap-6 max-w-3xl">
         <div className="card p-6">

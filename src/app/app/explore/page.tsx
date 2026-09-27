@@ -95,8 +95,8 @@ export default async function ExplorePage() {
               <circle cx="55" cy="55" r="42" fill="none" stroke="var(--violet)" strokeWidth="16" strokeDasharray="110.8 153.5" strokeDashoffset="0" transform="rotate(-90 55 55)" />
               <circle cx="55" cy="55" r="42" fill="none" stroke="var(--violet-2)" strokeWidth="16" strokeDasharray="97.7 166.6" strokeDashoffset="-110.8" transform="rotate(-90 55 55)" />
               <circle cx="55" cy="55" r="42" fill="none" stroke="var(--magenta)" strokeWidth="16" strokeDasharray="39.6 224.7" strokeDashoffset="-208.5" transform="rotate(-90 55 55)" />
-              <text x="55" y="51" textAnchor="middle" fill="var(--paper)" fontFamily="Bricolage Grotesque" fontSize="20" fontWeight="600">{patternCount}</text>
-              <text x="55" y="67" textAnchor="middle" fill="var(--mist-dim)" fontFamily="IBM Plex Mono, monospace" fontSize="8">Total</text>
+              <text x="55" y="51" textAnchor="middle" fill="var(--paper)" fontSize="20" fontWeight="600" style={{ fontFamily: "var(--ui-display)", letterSpacing: "-.02em" }}>{patternCount}</text>
+              <text x="55" y="67" textAnchor="middle" fill="var(--mist-dim)" fontSize="8" style={{ fontFamily: "var(--ui)" }}>Total</text>
             </svg>
             <div className="space-y-2 font-mono text-[11px]">
               <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full" style={{ background: "var(--violet)" }}></span>High <span className="text-[var(--mist-dim)]">42%</span></div>

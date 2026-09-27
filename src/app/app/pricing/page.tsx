@@ -7,9 +7,9 @@ const CheckIcon = () => (
 );
 
 const PLANS = [
-  { name: "STARTER", monthly: 89, blurb: "Perfect for small teams getting started with creative intelligence.", cta: "Get Started", popular: false, features: ["2 team seats", "150 videos analysed / month", "Read-only pattern library", "Performance history"] },
-  { name: "GROWTH", monthly: 289, blurb: "For growing teams who want deeper insights and collaboration.", cta: "Get Started", popular: true, features: ["5 team seats", "800 videos analysed / month", "Full pattern library + evidence", "AI-generated video ideas", "Entity & competitor tracking"] },
-  { name: "EXPERT", monthly: 889, blurb: "For agencies running multiple brands and workspaces.", cta: "Talk to us", popular: false, features: ["15 team seats", "Unlimited videos analysed", "Multiple brand workspaces", "Priority processing", "API access"] },
+  { name: "STARTER", monthly: 89, blurb: "Perfect for small teams getting started with creative intelligence.", cta: "Get Started", popular: false, features: ["2 team seats", "150 videos analysed / month", "Read-only pattern library"] },
+  { name: "GROWTH", monthly: 289, blurb: "For growing teams who want deeper insights and collaboration.", cta: "Get Started", popular: true, features: ["5 team seats", "800 videos analysed / month", "Full pattern library + evidence", "Priority support"] },
+  { name: "EXPERT", monthly: 889, blurb: "For agencies and large teams running multiple brands.", cta: "Talk to Sales", popular: false, features: ["Unlimited videos analysed", "Multiple brand workspaces", "API access + 15 team seats", "Dedicated success manager"] },
 ];
 
 export default function PricingPage() {
@@ -54,6 +54,17 @@ export default function PricingPage() {
             </div>
           );
         })}
+      </div>
+
+      <div className="card p-6 mt-8 flex items-center justify-between flex-wrap gap-4">
+        <div className="flex items-center gap-4">
+          <div className="avatar-circle" style={{ background: "rgba(123,47,247,0.15)", color: "var(--violet-2)" }}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="9" cy="8" r="3" /><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5" /></svg></div>
+          <div>
+            <p className="font-medium">Need something custom?</p>
+            <p className="text-[var(--mist)] text-sm">We&apos;ll tailor Mossaic to your organization&apos;s unique workflow and goals.</p>
+          </div>
+        </div>
+        <button className="px-5 py-2.5 rounded-full btn-ghost text-sm font-medium whitespace-nowrap">Talk to Sales</button>
       </div>
     </div>
   );

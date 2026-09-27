@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { currentOrganization } from "@/lib/org";
+import InviteButton from "./InviteButton";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +35,8 @@ export default async function TeamPage() {
     <div>
       <h1 className="font-serif text-4xl mb-2">Team</h1>
       <p className="text-[var(--mist)] mb-8">
-        Everyone contributing observations and reviewing patterns for {org.name}.
+        Everyone contributing observations and reviewing patterns for {org.name}. Between them, this team
+        has scrolled past roughly <span className="egg-stat">40,000 videos<span className="egg-tooltip">Rough estimate across the team&apos;s average daily scroll time this month</span></span> this month alone.
       </p>
       <div className="card overflow-hidden">
         {members.length === 0 ? (
@@ -65,6 +67,7 @@ export default async function TeamPage() {
           </table>
         )}
       </div>
+      <InviteButton />
     </div>
   );
 }

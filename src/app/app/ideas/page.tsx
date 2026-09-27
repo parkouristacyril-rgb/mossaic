@@ -79,8 +79,8 @@ export default function IdeasPage() {
     <div>
       <h1 className="font-serif text-4xl mb-2">Video Ideas</h1>
       <p className="text-[var(--mist)] mb-8">
-        Turn your pattern library into ready-to-shoot concepts for a specific campaign — built only from
-        mechanisms this brand has already proven.
+        Turn your pattern library into ready-to-shoot concepts for a specific campaign.{" "}
+        <span className="egg-stat">Most people scroll past 200+ ideas a day<span className="egg-tooltip">…without ever writing one down. This page is for the ones worth keeping.</span></span>
       </p>
 
       {error && <div className="notice notice-error">{error}</div>}

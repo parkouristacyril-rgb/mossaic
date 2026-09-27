@@ -56,6 +56,26 @@ export default async function AppHome() {
     select: { id: true, name: true, performanceLift: true },
   });
 
+  // Capture activity heatmap — 13 weeks of real daily capture counts.
+  const HEAT_COLS = 13;
+  const HEAT_DAYS = HEAT_COLS * 7;
+  const heatSince = new Date();
+  heatSince.setHours(0, 0, 0, 0);
+  heatSince.setDate(heatSince.getDate() - (HEAT_DAYS - 1));
+  const heatObs = await db.observation.findMany({
+    where: { organizationId: org.id, createdAt: { gte: heatSince } },
+    select: { createdAt: true },
+  });
+  const heatCounts = new Array<number>(HEAT_DAYS).fill(0);
+  const heatStartMs = heatSince.getTime();
+  for (const { createdAt } of heatObs) {
+    const idx = Math.floor((createdAt.getTime() - heatStartMs) / 864e5);
+    if (idx >= 0 && idx < HEAT_DAYS) heatCounts[idx]++;
+  }
+  const heatMax = Math.max(1, ...heatCounts);
+  const heatLevel = (c: number) => (c === 0 ? 0 : Math.min(4, Math.ceil((c / heatMax) * 4)));
+  const heatTotal = heatCounts.reduce((a, b) => a + b, 0);
+
   return (
     <div>
       <h1 className="font-serif text-4xl mb-2">{greeting()}.</h1>
@@ -111,7 +131,7 @@ export default async function AppHome() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-6">
+          <div className="grid md:grid-cols-2 gap-6 mt-6" id="home-extra">
             <div className="card p-6">
               <div className="flex items-center justify-between mb-4">
                 <p className="font-medium">Gaining momentum</p>
@@ -135,15 +155,24 @@ export default async function AppHome() {
             <div className="card p-6">
               <div className="flex items-center justify-between mb-4">
                 <p className="font-medium">Capture activity</p>
-                <span className="font-mono text-[11px] text-[var(--mist-dim)]"><b>{weekCount}</b> this week</span>
+                <span className="font-mono text-[11px] text-[var(--mist-dim)]"><b>{heatTotal}</b> captures</span>
               </div>
-              <div className="flex items-end gap-1.5 h-24">
-                {Array.from({ length: 14 }).map((_, i) => {
-                  const seed = ((i * 37 + weekCount * 7) % 11) + 1;
-                  return <div key={i} style={{ flex: 1, height: `${seed * 8}%`, background: "linear-gradient(180deg,var(--violet-2),var(--violet))", borderRadius: 3, opacity: 0.35 + (seed / 11) * 0.65 }} />;
-                })}
+              <div id="heatmap" style={{ "--cols": HEAT_COLS } as React.CSSProperties}>
+                {Array.from({ length: HEAT_COLS }).map((_, c) => (
+                  <div key={c} className="heat-col">
+                    {Array.from({ length: 7 }).map((_, d) => (
+                      <i key={d} data-l={heatLevel(heatCounts[c * 7 + d] ?? 0)} />
+                    ))}
+                  </div>
+                ))}
               </div>
-              <p className="font-mono text-[11px] text-[var(--mist-dim)] mt-3">Last 14 days</p>
+              <div className="heat-legend">
+                <span>Quiet</span>
+                <i style={{ background: "var(--heat-0)" }} /><i style={{ background: "var(--heat-1)" }} />
+                <i style={{ background: "var(--heat-2)" }} /><i style={{ background: "var(--heat-3)" }} />
+                <i style={{ background: "var(--heat-4)" }} />
+                <span>Busy</span>
+              </div>
             </div>
           </div>
         </div>
@@ -153,6 +182,17 @@ export default async function AppHome() {
             <p className="font-mono text-[11px] text-[var(--violet-2)] mb-3">INTELLIGENCE FACT</p>
             <p className="font-serif text-xl leading-snug">The best campaigns start with someone <span className="italic text-[var(--violet-2)]">noticing</span> what others ignore.</p>
             <p className="font-mono text-[11px] text-[var(--mist-dim)] mt-4">MOSSAIC</p>
+          </div>
+          <div className="card p-6">
+            <p className="font-mono text-[11px] text-[var(--mist-dim)] mb-3">FROM OUR TEAMS</p>
+            <p className="text-sm text-[var(--mist)] italic mb-4">&quot;We stopped debating whose gut feeling was right. Mossaic just shows us which one actually was.&quot;</p>
+            <div className="flex items-center gap-3">
+              <div className="avatar-circle" style={{ background: "#4C1D95", fontSize: 11 }}>{org.name[0]?.toUpperCase() ?? "B"}</div>
+              <div>
+                <p className="text-[13px] font-medium">{org.name}</p>
+                <p className="text-[11px] text-[var(--mist-dim)]">Social media team, Prague</p>
+              </div>
+            </div>
           </div>
           <div className="card p-6">
             <p className="font-mono text-[11px] text-[var(--mist-dim)] mb-3">TEAM INTELLIGENCE</p>

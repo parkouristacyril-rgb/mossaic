@@ -4,9 +4,32 @@ import { useEffect, useState } from "react";
 
 type State = "idle" | "saving" | "saved" | "error";
 
+type RecentObs = {
+  id: string;
+  reaction: string | null;
+  createdAt: string;
+  member: { name: string } | null;
+  video: { creatorHandle: string | null; url: string } | null;
+};
+
 async function resolveOrgId(): Promise<string> {
   const res = await fetch("/api/session");
   return (await res.json()).organizationId as string;
+}
+
+const AVATARS = ["#7B2FF7", "var(--violet-2)", "#4C1D95", "#E23FCB", "#3A3550"];
+
+const initials = (name: string) =>
+  name.split(/\s+/).map((p) => p[0]).slice(0, 2).join("").toUpperCase() || "?";
+
+function timeAgo(iso: string) {
+  const s = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
+  if (s < 60) return "just now";
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
 }
 
 export default function CapturePage() {
@@ -36,6 +59,15 @@ function SingleForm() {
   const [whyItWorked, setWhyItWorked] = useState("");
   const [state, setState] = useState<State>("idle");
   const [message, setMessage] = useState("");
+  const [recent, setRecent] = useState<RecentObs[]>([]);
+
+  async function loadRecent() {
+    try {
+      const orgId = await resolveOrgId();
+      const res = await fetch(`/api/observations?organizationId=${orgId}`);
+      if (res.ok) setRecent(((await res.json()).observations ?? []).slice(0, 5));
+    } catch { /* leave the panel empty on failure */ }
+  }
 
   // The share target redirects here with the link already extracted.
   useEffect(() => {
@@ -46,6 +78,7 @@ function SingleForm() {
       setState("error");
       setMessage("That share didn't contain a video link. Paste it below instead.");
     }
+    void loadRecent();
   }, []);
 
   async function submit(e: React.FormEvent) {
@@ -83,6 +116,7 @@ function SingleForm() {
           : "Observation received — it goes into your library the moment analysis finishes.",
       );
       setLink(""); setReaction(""); setFirstImpression(""); setWhyItWorked("");
+      void loadRecent();
     } catch {
       setState("error");
       setMessage("Network problem — the observation was not saved.");
@@ -117,12 +151,22 @@ function SingleForm() {
       </form>
       <div className="space-y-5">
         <div className="card p-6">
-          <p className="font-mono text-[11px] text-[var(--mist-dim)] mb-3">HOW IT WORKS</p>
-          <div className="space-y-3 text-sm text-[var(--mist)]">
-            <p><span className="text-[var(--paper)] font-medium">1.</span> Paste a link that caught your eye</p>
-            <p><span className="text-[var(--paper)] font-medium">2.</span> Add your instinct — what worked and why</p>
-            <p><span className="text-[var(--paper)] font-medium">3.</span> Mossaic analyses it and files it against your patterns</p>
-          </div>
+          <p className="font-mono text-[11px] text-[var(--mist-dim)] mb-3">RECENTLY CAPTURED</p>
+          {recent.length === 0 ? (
+            <p className="text-sm text-[var(--mist-dim)]">Nothing captured yet — your first observation shows up here.</p>
+          ) : (
+            <div className="space-y-3">
+              {recent.map((o, i) => (
+                <div key={o.id} className="flex items-center gap-3">
+                  <div className="avatar-circle" style={{ background: AVATARS[i % AVATARS.length], fontSize: 10 }}>{initials(o.member?.name ?? "Bulk")}</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm truncate">{o.reaction ?? o.video?.creatorHandle ?? o.video?.url ?? "New observation"}</p>
+                    <p className="text-[var(--mist-dim)] text-xs">{timeAgo(o.createdAt)} · {o.member?.name?.split(/\s+/)[0] ?? "Bulk"}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="card p-6" style={{ background: "rgba(123,47,247,0.06)" }}>
           <p className="font-mono text-[11px] text-[var(--violet-2)] mb-2">TIP</p>

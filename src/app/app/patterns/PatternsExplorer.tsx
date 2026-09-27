@@ -65,6 +65,15 @@ export default function PatternsExplorer({ patterns }: { patterns: PatternVM[] }
             <div className="stat-tile"><p className="font-display text-xl font-semibold">{selected.status[0] + selected.status.slice(1).toLowerCase()}</p><p className="text-[var(--mist-dim)] text-[11px] mt-1">Status</p></div>
           </div>
 
+          <div className="flex gap-6 border-b border-[var(--line)] mb-5 font-mono">
+            <span className="app2-tab active">Overview</span>
+            <span className="app2-tab">Supporting Observations</span>
+            <span className="app2-tab">Applications</span>
+          </div>
+          <svg width="500" height="130" viewBox="0 0 500 130" className="w-full mb-5" style={{ height: 130 }}>
+            <polyline points="0,100 50,90 100,70 150,80 200,50 250,60 300,30 350,45 400,20 450,15 500,5" fill="none" stroke="var(--violet-2)" strokeWidth="2.5" />
+          </svg>
+
           {selected.recommendedActions.length > 0 && (
             <div className="card p-4 mb-4" style={{ background: "rgba(123,47,247,0.06)" }}>
               <p className="font-mono text-[11px] text-[var(--mist-dim)] mb-2">RECOMMENDED ACTIONS</p>

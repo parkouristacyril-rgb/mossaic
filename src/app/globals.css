@@ -66,8 +66,6 @@
   .faq-item.open .faq-icon{ transform: rotate(45deg); color:var(--violet-2); }
 
   /* App view */
-  #app-view{ position:fixed; inset:0; z-index:100; background:var(--ink); overflow-y:auto; display:none; }
-  #app-view.open{ display:block; }
   .sidebar-item{ display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; color:var(--mist); font-size:14px; cursor:pointer; transition:.2s; border:1px solid transparent; white-space:nowrap;}
   .sidebar-item:hover{ background: rgba(255,255,255,0.03); color:var(--paper);}
   .sidebar-item.active{ background: rgba(123,47,247,0.14); border-color: rgba(157,92,255,0.35); color:var(--paper);}
@@ -75,8 +73,6 @@
   .app-panel.active{ display:block; animation: panelIn .4s cubic-bezier(.2,.8,.2,1); }
   .doc-panel{ display:none; }
   .doc-panel.active{ display:block; animation: panelIn .4s cubic-bezier(.2,.8,.2,1); }
-  #docs-view{ position:fixed; inset:0; z-index:100; background:var(--ink); overflow-y:auto; display:none; }
-  #docs-view.open{ display:block; }
   @keyframes panelIn{ from{opacity:0; transform: translateY(10px);} to{opacity:1; transform:none;} }
   .app-shell{ display:flex; flex-direction:column; min-height:100vh; }
   @media(min-width:768px){ .app-shell{ flex-direction:row; } }
@@ -93,7 +89,7 @@
   .stat-num{ font-variant-numeric: tabular-nums; }
 
   @media (prefers-reduced-motion: reduce){
-    .reveal, .tile-hover, #app-view{ transition:none !important; }
+    .reveal, .tile-hover{ transition:none !important; }
     .reveal{ clip-path: inset(0 0 0% 0) !important; }
   }
 
@@ -702,16 +698,16 @@ p{ text-wrap: pretty; }
 #hero-mark{ width:min(212px,64%); height:auto; aspect-ratio:880/430; display:block; }
 .login-wordmark{ font-family:'Manrope',sans-serif !important; font-weight:200 !important;
   font-size:23px !important; letter-spacing:.40em !important; text-indent:.40em; margin:8px 0 0 !important; line-height:1; }
-.login-kicker{ font-family:'Bricolage Grotesque',sans-serif; font-size:13px; line-height:1.55;
+.login-kicker{ font-family:var(--ui); font-size:13px; line-height:1.55;
   color:var(--mist); margin:12px auto 0; max-width:25ch; }
 .login-fields{ width:100%; display:flex; flex-direction:column; gap:11px; }
 .lf{ position:relative; display:block; }
 .lf > span{ position:absolute; left:0; right:0; top:11px; text-align:center; font-family:var(--mono),monospace;
   font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--mist-dim); pointer-events:none; }
 .lf > input{ width:100%; padding:28px 16px 12px !important; border-radius:17px !important; text-align:center;
-  color:var(--paper); font-family:'Manrope',sans-serif; font-size:15px; font-weight:500; }
+  color:var(--paper); font-family:var(--ui); font-size:15px; font-weight:500; }
 .login-go{ width:100%; margin-top:6px; padding:15px 20px; border:0; color:#fff;
-  font-family:'Manrope',sans-serif; font-weight:600; font-size:14px; cursor:pointer; }
+  font-family:var(--ui); font-weight:600; font-size:14px; cursor:pointer; }
 .login-foot{ font-size:11px; line-height:1.7; color:var(--mist-dim); }
 @media (max-width:560px){ .login-card{ gap:22px; } #hero-mark{ width:min(184px,70%); } }
 
@@ -2475,8 +2471,8 @@ html.rng-flash .app2-main{ animation:rngFlash .48s var(--e); }
   background:
     radial-gradient(closest-side at 28% 58%, rgba(96,128,255,.30), transparent 72%),
     radial-gradient(closest-side at 76% 42%, rgba(226,63,203,.25), transparent 68%);
-  opacity: calc(.52 + var(--charge, 0) * .42);
-  scale: calc(1 + var(--charge, 0) * .08);
+  opacity: calc(.30 + var(--charge, 0) * .32 + var(--lum, 0) * .46);
+  scale: calc(1 + var(--charge, 0) * .08 + var(--lum, 0) * .05);
   transition: opacity .5s ease, scale .5s ease;
   animation: markBreathe 14.7s ease-in-out infinite alternate;
   will-change: opacity;
@@ -2500,6 +2496,16 @@ html.rng-flash .app2-main{ animation:rngFlash .48s var(--e); }
 #mark-video, .mark-still{
   filter: brightness(1.06) saturate(1.04) url(#mark-luma);
 }
+/* the baked bitmap is what you normally see, and it breathes the same way.
+   --lum is written every frame by the circuit's own loop, so the swell and
+   the light running the figure of eight keep one clock: fill the form and
+   both quicken together. Brightness and saturation only — the cast light
+   below does the glow, because a drop-shadow recomputed every frame on a
+   bitmap is the one thing here that would cost real work. */
+.mark-shot{
+  filter: brightness(calc(.82 + var(--lum, 0) * .66))
+          saturate(calc(.92 + var(--lum, 0) * .28));
+}
 #mark-video{
   animation: markRise 8.3s cubic-bezier(.45,0,.35,1) infinite alternate,
              markTilt 11.9s cubic-bezier(.4,0,.35,1) infinite alternate;
@@ -2522,12 +2528,34 @@ html.rng-flash .app2-main{ animation:rngFlash .48s var(--e); }
 #mark-video{ z-index:2; opacity:0; }
 .mark-shot{ z-index:3; opacity:0; display:block; transform-origin: 50% 52%; }
 
+/* THE MARK, as an animated image.
+   A <video> has to be allowed to play: a codec, an autoplay policy, a
+   pointer test, a play() promise that can be refused — four ways to end up
+   looking at a frozen frame, and on some machines that is exactly what
+   happened. An animated WebP has none of that. The browser loops it from
+   the first frame to the last for ever, the same way it draws any picture.
+   It carries the same keying as the clip did, so the black it was rendered
+   against becomes transparent. */
+.mark-anim{
+  z-index:4; opacity:1; display:block;
+  filter: brightness(1.06) saturate(1.04) url(#mark-luma);
+}
+.mark-stage:not(.signing):not(.shut) .mark-shot,
+.mark-stage:not(.signing):not(.shut) .mark-still,
+.mark-stage:not(.signing):not(.shut) #mark-video{ opacity:0 !important; }
+/* the way in still plays on the baked frame, so the animation steps aside */
+.mark-stage.signing .mark-anim,
+.mark-stage.shut .mark-anim{ opacity:0; transition:opacity .12s linear; }
+
 .mark-stage.ready .mark-shot{ opacity:1; }
 .mark-stage.ready .mark-shot{
   animation: markRise 8.3s cubic-bezier(.45,0,.35,1) infinite alternate,
              markTilt 11.9s cubic-bezier(.4,0,.35,1) infinite alternate;
 }
 .mark-stage.playing #mark-video{ opacity:1; transition:opacity .5s ease; }
+/* and the bitmap under it steps aside — it sits at a higher z-index than the
+   clip, so while it was visible the clip played behind it and nobody saw it */
+.mark-stage.playing .mark-shot{ opacity:0; transition:opacity .5s ease; }
 
 /* and if the frame could not be lifted at all — a canvas that would not give
    its pixels back — the still stands in, filtered the old way, and the whole
@@ -2537,6 +2565,23 @@ html.rng-flash .app2-main{ animation:rngFlash .48s var(--e); }
 .mark-stage.no-shot .mark-still{
   animation: markRise 8.3s cubic-bezier(.45,0,.35,1) infinite alternate,
              markTilt 11.9s cubic-bezier(.4,0,.35,1) infinite alternate;
+}
+/* Brightness alone could not carry the breath: the core of the wave is
+   already near white, so multiplying it just clips. The mark fades a
+   little at the trough as well, which is what the swell actually reads
+   as. Both rules sit BEFORE the sign-in ones on purpose — during the
+   gesture the mark is held at full opacity and none of this applies. */
+.mark-stage:not(.playing).ready .mark-shot,
+.mark-stage:not(.playing).no-shot .mark-still{
+  opacity: calc(.62 + var(--lum, 0) * .38);
+}
+:root[data-theme="light"] .mark-stage:not(.playing).ready .mark-shot,
+:root[data-theme="light"] .mark-stage:not(.playing).no-shot .mark-still{
+  opacity: calc(.82 + var(--lum, 0) * .18);
+}
+:root[data-theme="light"] .mark-shot{
+  filter: brightness(calc(.95 + var(--lum, 0) * .26))
+          saturate(calc(.96 + var(--lum, 0) * .30));
 }
 .mark-stage.no-shot.signing .mark-still{
   transform: scale(1, .94); animation-play-state: paused;
@@ -2708,12 +2753,6 @@ html.signing-in #bg-canvas-login{ opacity:.55; transition:opacity .4s ease; }
 /* Nothing behind a full-screen view needs to be drawn. The site was still
    painting its whole landing page — drifting SVG and all — underneath the
    workspace, every frame, for no one. */
-html:has(#app2-view.open) #marketing-view,
-html:has(#app2-view.open) #app-view,
-html:has(#app2-view.open) #docs-view,
-html:has(#login-view.open) #marketing-view,
-html:has(#login-view.open) #app-view,
-html:has(#login-view.open) #docs-view{ visibility:hidden; }
 
 @media (max-width: 560px){
   .mark-stage{ width:min(162px, 62%); }
@@ -4423,3 +4462,15 @@ html:has(#login-view.open) #docs-view{ visibility:hidden; }
    not as a value. */
 .stat-tile [data-figure]:not(.is-down){ transition:color .2s var(--e-soft); }
 
+
+/* ---------- the figures beside a name ----------
+   A lift printed next to a pattern was set in the mono face while the same
+   value in the tile above it was set in the interface face — two typefaces
+   for one number on one screen. Mono stays where it belongs: dates, counts,
+   units, breadcrumbs, kickers. */
+.pattern-conf, .pv-lift, .mo-lift, .rv-rr em{
+  font-family:var(--ui) !important;
+  font-variant-numeric: tabular-nums;
+  font-size:12.5px; letter-spacing:-.004em;
+}
+.pattern-conf{ font-weight:500; }
