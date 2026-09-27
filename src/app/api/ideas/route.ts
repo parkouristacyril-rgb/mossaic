@@ -2,11 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { generateIdeas, NoPatternsError } from "@/lib/pipeline/generate-ideas";
+import { requireApiSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
 export const maxDuration = 120;
 
+// organizationId comes from the session, not the body.
 const Schema = z.object({
-  organizationId: z.string().min(1),
   campaign: z.string().min(1).max(200),
   goal: z.string().min(1).max(200),
   audience: z.string().max(500).optional(),
@@ -16,6 +18,9 @@ const Schema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  const auth = await requireApiSession({ write: true });
+  if (auth instanceof NextResponse) return auth;
+
   const parsed = Schema.safeParse(await request.json());
   if (!parsed.success) {
     return NextResponse.json(
@@ -25,7 +30,10 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const batch = await generateIdeas(parsed.data);
+    const batch = await generateIdeas({
+      ...parsed.data,
+      organizationId: auth.organizationId,
+    });
     return NextResponse.json(batch, { status: 201 });
   } catch (error) {
     if (error instanceof NoPatternsError) {
@@ -35,14 +43,12 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
-  const organizationId = request.nextUrl.searchParams.get("organizationId");
-  if (!organizationId) {
-    return NextResponse.json({ error: "organizationId is required" }, { status: 400 });
-  }
+export async function GET() {
+  const auth = await requireApiSession();
+  if (auth instanceof NextResponse) return auth;
 
   const batches = await db.ideaBatch.findMany({
-    where: { organizationId },
+    where: { organizationId: auth.organizationId },
     orderBy: { createdAt: "desc" },
     take: 10,
     include: { ideas: true },

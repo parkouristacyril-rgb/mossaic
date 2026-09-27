@@ -31,9 +31,10 @@ export default function SettingsPage() {
     try { localStorage.setItem("mossaic-theme", t); } catch { /* ignore */ }
   }
 
-  function signOut() {
-    try { localStorage.removeItem("mossaic.session.v1"); } catch { /* ignore */ }
+  async function signOut() {
+    try { await fetch("/api/auth/logout", { method: "POST" }); } catch { /* ignore */ }
     router.push("/login");
+    router.refresh();
   }
 
   return (

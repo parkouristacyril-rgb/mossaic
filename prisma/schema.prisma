@@ -45,6 +45,13 @@ model Member {
   createdAt      DateTime   @default(now())
   lastActiveAt   DateTime?
 
+  /// scrypt-derived credential. Both are null until the member sets a password
+  /// (e.g. an invited-but-not-yet-activated teammate); such a member cannot log
+  /// in. Stored separately so the salt is explicit — the hash is never usable
+  /// without it, and it is unique per member.
+  passwordHash   String?
+  passwordSalt   String?
+
   organization Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   observations Observation[]
 

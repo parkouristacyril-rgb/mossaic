@@ -1,16 +1,25 @@
 import { NextResponse } from "next/server";
-import { currentOrganization } from "@/lib/org";
+import { getSession, unauthorized } from "@/lib/auth";
 
-// Reads from the database on every call, so it must never be statically
-// prerendered at build time — without this, `next build` tries to execute the
-// handler (and hit Postgres) while generating static pages.
 export const dynamic = "force-dynamic";
 
 /**
- * Stands in for real auth. Client components ask this which organization they
- * are acting on, so when sessions arrive only this file changes.
+ * Tells the client shell who it is acting as. Everything here comes from the
+ * verified session cookie, so a client can never learn about — let alone act
+ * on — an organization it is not a member of.
  */
 export async function GET() {
-  const org = await currentOrganization();
-  return NextResponse.json({ organizationId: org.id, name: org.name });
+  const session = await getSession();
+  if (!session) return unauthorized();
+
+  return NextResponse.json({
+    organizationId: session.organizationId,
+    name: session.orgName,
+    member: {
+      id: session.memberId,
+      name: session.name,
+      email: session.email,
+      role: session.role,
+    },
+  });
 }

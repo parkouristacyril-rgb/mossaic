@@ -1,14 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { requireApiSession } from "@/lib/auth";
 
-export async function GET(request: NextRequest) {
-  const organizationId = request.nextUrl.searchParams.get("organizationId");
-  if (!organizationId) {
-    return NextResponse.json({ error: "organizationId is required" }, { status: 400 });
-  }
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  const auth = await requireApiSession();
+  if (auth instanceof NextResponse) return auth;
 
   const patterns = await db.pattern.findMany({
-    where: { organizationId },
+    where: { organizationId: auth.organizationId },
     orderBy: [{ confidence: "desc" }],
     include: {
       _count: { select: { evidence: true } },

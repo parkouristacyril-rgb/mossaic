@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
+import { currentOrganization } from "@/lib/org";
 
 export const dynamic = "force-dynamic";
 
@@ -11,8 +12,10 @@ const statusLabel = (s: string) =>
   ({ ANALYZED: "Analysed", PROCESSING: "Analysing…", AWAITING_DATA: "Waiting on stats", FAILED: "Failed", PENDING: "Queued" }[s] ?? s);
 
 export default async function VideoPage({ params }: { params: { id: string } }) {
-  const video = await db.video.findUnique({
-    where: { id: params.id },
+  const org = await currentOrganization();
+  // Scoped to the caller's org: a video id from another tenant 404s here.
+  const video = await db.video.findFirst({
+    where: { id: params.id, organizationId: org.id },
     include: {
       analysis: true,
       scores: true,

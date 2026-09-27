@@ -15,11 +15,6 @@ type Idea = {
 
 type Batch = { id: string; campaign: string; goal: string; ideas: Idea[] };
 
-async function resolveOrgId(): Promise<string> {
-  const res = await fetch("/api/session");
-  return (await res.json()).organizationId as string;
-}
-
 export default function IdeasPage() {
   const [campaign, setCampaign] = useState("");
   const [count, setCount] = useState(10);
@@ -33,8 +28,7 @@ export default function IdeasPage() {
 
   useEffect(() => {
     void (async () => {
-      const orgId = await resolveOrgId();
-      const res = await fetch(`/api/ideas?organizationId=${orgId}`);
+      const res = await fetch("/api/ideas");
       if (res.ok) setBatches((await res.json()).batches ?? []);
     })();
   }, []);
@@ -52,7 +46,6 @@ export default function IdeasPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          organizationId: await resolveOrgId(),
           campaign,
           goal,
           count,

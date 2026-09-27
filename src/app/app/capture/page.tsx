@@ -12,11 +12,6 @@ type RecentObs = {
   video: { creatorHandle: string | null; url: string } | null;
 };
 
-async function resolveOrgId(): Promise<string> {
-  const res = await fetch("/api/session");
-  return (await res.json()).organizationId as string;
-}
-
 const AVATARS = ["#7B2FF7", "var(--violet-2)", "#4C1D95", "#E23FCB", "#3A3550"];
 
 const initials = (name: string) =>
@@ -63,8 +58,7 @@ function SingleForm() {
 
   async function loadRecent() {
     try {
-      const orgId = await resolveOrgId();
-      const res = await fetch(`/api/observations?organizationId=${orgId}`);
+      const res = await fetch("/api/observations");
       if (res.ok) setRecent(((await res.json()).observations ?? []).slice(0, 5));
     } catch { /* leave the panel empty on failure */ }
   }
@@ -95,7 +89,6 @@ function SingleForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          organizationId: await resolveOrgId(),
           link,
           reaction: reaction || undefined,
           firstImpression: firstImpression || undefined,
@@ -187,7 +180,6 @@ function BulkForm() {
     if (links.length === 0 || busy) return;
     setBusy(true);
     setDone(null);
-    const orgId = await resolveOrgId();
     let ok = 0;
     let fail = 0;
     for (const link of links) {
@@ -195,7 +187,7 @@ function BulkForm() {
         const res = await fetch("/api/observations", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ organizationId: orgId, link, source: "BULK_IMPORT" }),
+          body: JSON.stringify({ link, source: "BULK_IMPORT" }),
         });
         if (res.ok) ok += 1; else fail += 1;
       } catch {

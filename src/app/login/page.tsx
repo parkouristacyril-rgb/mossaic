@@ -1,18 +1,60 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import BgCanvas from "../app/BgCanvas";
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+function LoginForm() {
   const router = useRouter();
+  const params = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
 
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
-    try { localStorage.setItem("mossaic.session.v1", JSON.stringify({ email, at: Date.now() })); } catch { /* ignore */ }
-    router.push("/app");
+
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail || !password) {
+      setError("Enter your email and password to continue.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setError("Enter a valid email address.");
+      return;
+    }
+
+    setBusy(true);
+    setError("");
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmedEmail, password }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setError(body.error ?? "Could not sign in. Try again.");
+        setBusy(false);
+        return;
+      }
+      // The session cookie is set by the server; go where they were headed.
+      const next = params.get("next");
+      router.push(next && next.startsWith("/app") ? next : "/app");
+      router.refresh();
+    } catch {
+      setError("Network problem — could not sign in.");
+      setBusy(false);
+    }
   }
 
   return (
@@ -40,16 +82,17 @@ export default function LoginPage() {
           <div className="login-fields">
             <label className="lf">
               <span>Email</span>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="you@company.com" autoComplete="username" spellCheck={false} />
+              <input value={email} onChange={(e) => { setEmail(e.target.value); setError(""); }} type="text" placeholder="you@company.com" autoComplete="username" spellCheck={false} />
             </label>
             <label className="lf">
               <span>Password</span>
-              <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="••••••••••" autoComplete="current-password" />
+              <input value={password} onChange={(e) => { setPassword(e.target.value); setError(""); }} type="password" placeholder="••••••••••" autoComplete="current-password" />
             </label>
-            <button type="submit" className="btn-primary login-go">Enter workspace</button>
+            {error && <p className="login-error" role="alert" style={{ color: "var(--rose, #f87171)", fontSize: 13, margin: "-4px 0 0" }}>{error}</p>}
+            <button type="submit" disabled={busy} className="btn-primary login-go">{busy ? "Signing in…" : "Enter workspace"}</button>
           </div>
 
-          <p className="login-foot">Your workspace is kept on this device. Sign in with the email and password you created.</p>
+          <p className="login-foot">Sign in with the email and password for your workspace.</p>
         </form>
       </div>
     </div>

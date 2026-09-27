@@ -33,4 +33,8 @@ export const env = {
   get jobSecret() {
     return required("JOB_SECRET");
   },
+  /** Signs session cookies. Rotating it invalidates every existing session. */
+  get authSecret() {
+    return required("AUTH_SECRET");
+  },
 };

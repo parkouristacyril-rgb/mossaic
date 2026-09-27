@@ -3,10 +3,14 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { parseLink, UnsupportedLinkError } from "@/lib/link";
 import { enqueueVideoProcessing } from "@/lib/pipeline/queue";
+import { requireApiSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
+// The organization and the author are taken from the verified session, never
+// from the request body — the client cannot file an observation into another
+// org or under another member's name.
 const SingleSchema = z.object({
-  organizationId: z.string().min(1),
-  memberId: z.string().optional(),
   link: z.string().min(1),
   reaction: z.string().max(2000).optional(),
   firstImpression: z.string().max(2000).optional(),
@@ -15,12 +19,13 @@ const SingleSchema = z.object({
 });
 
 const BulkSchema = z.object({
-  organizationId: z.string().min(1),
-  memberId: z.string().optional(),
   links: z.array(z.string().min(1)).min(1).max(200),
 });
 
 export async function POST(request: NextRequest) {
+  const auth = await requireApiSession({ write: true });
+  if (auth instanceof NextResponse) return auth;
+
   let body: unknown;
   try {
     body = await request.json();
@@ -29,7 +34,9 @@ export async function POST(request: NextRequest) {
   }
 
   const bulk = BulkSchema.safeParse(body);
-  if (bulk.success) return handleBulk(bulk.data);
+  if (bulk.success) {
+    return handleBulk(bulk.data, auth.organizationId, auth.memberId);
+  }
 
   const single = SingleSchema.safeParse(body);
   if (!single.success) {
@@ -40,7 +47,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const result = await ingestOne(single.data);
+    const result = await ingestOne(single.data, auth.organizationId, auth.memberId);
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
     if (error instanceof UnsupportedLinkError) {
@@ -52,7 +59,11 @@ export async function POST(request: NextRequest) {
 
 type SingleInput = z.infer<typeof SingleSchema>;
 
-async function ingestOne(input: SingleInput) {
+async function ingestOne(
+  input: SingleInput,
+  organizationId: string,
+  memberId: string,
+) {
   const link = parseLink(input.link);
 
   // The dedup point. A second person sharing the same clip adds their
@@ -60,7 +71,7 @@ async function ingestOne(input: SingleInput) {
   const existing = await db.video.findUnique({
     where: {
       organizationId_platform_externalId: {
-        organizationId: input.organizationId,
+        organizationId,
         platform: link.platform,
         externalId: link.externalId,
       },
@@ -71,7 +82,7 @@ async function ingestOne(input: SingleInput) {
     existing ??
     (await db.video.create({
       data: {
-        organizationId: input.organizationId,
+        organizationId,
         platform: link.platform,
         externalId: link.externalId,
         url: link.url,
@@ -81,9 +92,9 @@ async function ingestOne(input: SingleInput) {
 
   const observation = await db.observation.create({
     data: {
-      organizationId: input.organizationId,
+      organizationId,
       videoId: video.id,
-      memberId: input.memberId,
+      memberId,
       reaction: input.reaction,
       firstImpression: input.firstImpression,
       whyItWorked: input.whyItWorked,
@@ -101,18 +112,21 @@ async function ingestOne(input: SingleInput) {
   };
 }
 
-async function handleBulk(input: z.infer<typeof BulkSchema>) {
+async function handleBulk(
+  input: z.infer<typeof BulkSchema>,
+  organizationId: string,
+  memberId: string,
+) {
   const accepted: string[] = [];
   const rejected: Array<{ link: string; reason: string }> = [];
 
   for (const link of input.links) {
     try {
-      const result = await ingestOne({
-        organizationId: input.organizationId,
-        memberId: input.memberId,
-        link,
-        source: "BULK_IMPORT",
-      });
+      const result = await ingestOne(
+        { link, source: "BULK_IMPORT" },
+        organizationId,
+        memberId,
+      );
       accepted.push(result.videoId);
     } catch (error) {
       rejected.push({
@@ -128,14 +142,12 @@ async function handleBulk(input: z.infer<typeof BulkSchema>) {
   );
 }
 
-export async function GET(request: NextRequest) {
-  const organizationId = request.nextUrl.searchParams.get("organizationId");
-  if (!organizationId) {
-    return NextResponse.json({ error: "organizationId is required" }, { status: 400 });
-  }
+export async function GET() {
+  const auth = await requireApiSession();
+  if (auth instanceof NextResponse) return auth;
 
   const observations = await db.observation.findMany({
-    where: { organizationId },
+    where: { organizationId: auth.organizationId },
     orderBy: { createdAt: "desc" },
     take: 50,
     include: {

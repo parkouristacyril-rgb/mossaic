@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5b984134-6043-4f44-9e59-f8959670609e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/seed.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/ideas/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/ideas/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/observations/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/observations/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/patterns/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/patterns/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/session/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/session/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/videos/[id]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/videos/[id]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/capture/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/capture/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/ideas/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/ideas/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/settings/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/settings/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/videos/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/videos/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/env.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/org.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/org.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/mru/personal/mossaic/mosaic-nextjs/mosaic" value="3JtzI0Vxt0sh5yB4GElJTIIHVfH" />
+    </persistenceIdMap>
+  </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="af7c4f9c-5ea1-4f63-b899-106fe73a7ee8" value="green" />
+    </colors>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="64" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3JtzI0Vxt0sh5yB4GElJTIIHVfH" />
+  <component name="ProjectViewState">
+    <option name="foldersAlwaysOnTop" value="false" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortKey" value="BY_TIME_ASCENDING" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/mru/personal/mossaic/mosaic-nextjs/mosaic",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.9437.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5b984134-6043-4f44-9e59-f8959670609e" name="Changes" comment="" />
+      <created>1790495069251</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1790495069251</updated>
+      <workItem from="1790495787165" duration="1857000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

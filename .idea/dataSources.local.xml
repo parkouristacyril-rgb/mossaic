@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="WS-262.9437.145">
+    <data-source name="NeonDB" uuid="af7c4f9c-5ea1-4f63-b899-106fe73a7ee8">
+      <database-info product="PostgreSQL" version="18.6 (6569466)" jdbc-version="4.2" driver-name="Amazon Web Services (AWS) Advanced JDBC Wrapper" driver-version="Amazon Web Services (AWS) Advanced JDBC Wrapper 4.3.0 ( Revision: da6900b4d22e0aaa6615dca5790af39f3a84ab5d )" dbms="POSTGRES" exact-version="18.6" exact-driver-version="4.3">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>neondb_owner</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node negative="1">
+            <node kind="database" qname="@">
+              <node kind="schema" qname="@" />
+            </node>
+            <node kind="database" qname="neondb">
+              <node kind="schema" qname="public" />
+            </node>
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+  </component>
+</project>

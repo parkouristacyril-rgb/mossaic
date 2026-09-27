@@ -1,18 +1,59 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import BgCanvas from "./BgCanvas";
 import { NAV, FOOTER_NAV, LABELS } from "./nav";
 
+type Me = { name: string; role: string; orgName: string };
+
+const initials = (name: string) =>
+  name.split(/\s+/).map((p) => p[0]).slice(0, 2).join("").toUpperCase() || "?";
+
+const roleLabel = (r: string) =>
+  ({ ADMIN: "Workspace Admin", CONTRIBUTOR: "Contributor", VIEWER: "Viewer" }[r] ?? r);
+
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  // Hold rendering until the server has confirmed who we are. Middleware already
+  // blocks unauthenticated requests to /app, but confirming here also gives us
+  // the real member/org to render and handles a session that expired mid-visit.
+  const [me, setMe] = useState<Me | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [orgMenu, setOrgMenu] = useState(false);
   const [notifMenu, setNotifMenu] = useState(false);
   const [moreSheet, setMoreSheet] = useState(false);
   const topbarRef = useRef<HTMLDivElement>(null);
+
+  // Ask the server who this session belongs to; bounce to login if there is none.
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const res = await fetch("/api/session");
+        if (!res.ok) { router.replace("/login"); return; }
+        const data = await res.json();
+        if (!cancelled) {
+          setMe({
+            name: data.member?.name ?? "Member",
+            role: data.member?.role ?? "VIEWER",
+            orgName: data.name ?? "Workspace",
+          });
+        }
+      } catch {
+        router.replace("/login");
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [router]);
+
+  async function signOut() {
+    try { await fetch("/api/auth/logout", { method: "POST" }); } catch { /* ignore */ }
+    router.replace("/login");
+    router.refresh();
+  }
 
   // Close the popovers on any outside click.
   useEffect(() => {
@@ -33,6 +74,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   const bottomHrefs = ["/app", "/app/capture", "/app/patterns", "/app/ideas"];
   const bottomTabs = bottomHrefs.map((href) => NAV.find((n) => n.href === href)!);
+
+  // Avoid flashing the workspace before the session check completes / redirects.
+  if (!me) return null;
 
   return (
     <div className="app-shell" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
@@ -114,19 +158,22 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 )}
               </div>
               <div className="flex items-center gap-2.5">
-                <div className="avatar-circle" style={{ background: "var(--violet)" }}>JR</div>
+                <div className="avatar-circle" style={{ background: "var(--violet)" }}>{initials(me.name)}</div>
                 <div className="hidden sm:block leading-tight">
-                  <p className="text-sm font-medium">Jordan Reyes</p>
+                  <p className="text-sm font-medium">{me.name}</p>
                   <div className="relative">
                     <button onClick={(e) => { e.stopPropagation(); setOrgMenu((v) => !v); setNotifMenu(false); }} className="flex items-center gap-1 text-[11px] text-[var(--mist-dim)] hover:text-[var(--paper)] transition-colors" style={{ background: "transparent", border: "none", padding: 0, cursor: "pointer" }}>
-                      <span>BUMP</span>
+                      <span>{me.orgName}</span>
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     </button>
                     {orgMenu && (
-                      <div className="absolute top-[calc(100%+8px)] right-0 card p-1.5 w-48 z-30">
-                        <p className="font-mono text-[10px] text-[var(--mist-dim)] px-3 pt-1.5 pb-1">ORGANIZATIONS</p>
-                        <div className="org-menu-item active">BUMP</div>
-                        <p className="font-mono text-[10px] text-[var(--mist-dim)] px-3 pt-2 pb-1.5" style={{ lineHeight: 1.5 }}>A second brand workspace comes with Expert.</p>
+                      <div className="absolute top-[calc(100%+8px)] right-0 card p-1.5 w-52 z-30">
+                        <p className="font-mono text-[10px] text-[var(--mist-dim)] px-3 pt-1.5 pb-1">SIGNED IN AS</p>
+                        <div className="px-3 pb-2">
+                          <p className="text-sm">{me.name}</p>
+                          <p className="text-[11px] text-[var(--mist-dim)]">{roleLabel(me.role)} · {me.orgName}</p>
+                        </div>
+                        <button onClick={signOut} className="org-menu-item w-full text-left" style={{ cursor: "pointer", color: "var(--rose, #f87171)" }}>Sign out</button>
                       </div>
                     )}
                   </div>
