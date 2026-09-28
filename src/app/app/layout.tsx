@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import BgCanvas from "./BgCanvas";
-import { NAV, FOOTER_NAV, LABELS } from "./nav";
+import MossCompanion from "@/components/MossCompanion";
+import { NAV, FOOTER_NAV, LABELS, Icon } from "./nav";
 
 type Me = { name: string; role: string; orgName: string };
 
@@ -98,16 +99,18 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
           <nav className="space-y-0.5 flex-1">
             {NAV.map((item) => (
-              <Link key={item.key} href={item.href} className={`app2-nav-item${isActive(item.href) ? " active" : ""}`}>
-                {item.icon} {!collapsed && <span className="sidebar-label">{item.label}</span>}
+              <Link key={item.key} href={item.href} data-name={item.label} className={`app2-nav-item${isActive(item.href) ? " active" : ""}`}>
+                <span className="nav-tile">{item.icon}</span>
+                {!collapsed && <span className="sidebar-label">{item.label}</span>}
               </Link>
             ))}
           </nav>
 
           <div className="pt-3 mt-3 border-t border-[var(--line)] space-y-0.5">
             {FOOTER_NAV.map((item) => (
-              <Link key={item.key} href={item.href} className={`app2-nav-item${isActive(item.href) ? " active" : ""}`}>
-                {item.icon} {!collapsed && <span className="sidebar-label">{item.label}</span>}
+              <Link key={item.key} href={item.href} data-name={item.label} className={`app2-nav-item${isActive(item.href) ? " active" : ""}`}>
+                <span className="nav-tile">{item.icon}</span>
+                {!collapsed && <span className="sidebar-label">{item.label}</span>}
               </Link>
             ))}
           </div>
@@ -130,14 +133,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </div>
             <div className="relative hidden md:block flex-1 max-w-[420px]">
               <div className="search-pill">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><line x1="16.5" y1="16.5" x2="21" y2="21" /></svg>
+                <Icon name="search" style={{ width: 15, height: 15 }} />
                 <input type="text" placeholder="Search patterns, ideas, entities…" className="bg-transparent border-none outline-none text-[13px] text-[var(--paper)] w-full placeholder:text-[var(--mist-dim)]" />
               </div>
             </div>
             <div className="flex items-center gap-4 flex-shrink-0">
               <div className="relative">
-                <button onClick={(e) => { e.stopPropagation(); setNotifMenu((v) => !v); setOrgMenu(false); }} className="relative flex items-center justify-center" style={{ width: 32, height: 32, background: "transparent", border: "none", padding: 0, cursor: "pointer" }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mist)" strokeWidth="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" strokeLinecap="round" strokeLinejoin="round" /><path d="M13.7 21a2 2 0 0 1-3.4 0" /></svg>
+                <button onClick={(e) => { e.stopPropagation(); setNotifMenu((v) => !v); setOrgMenu(false); }} className="relative flex items-center justify-center" style={{ width: 32, height: 32, background: "transparent", border: "none", padding: 0, cursor: "pointer", color: "var(--mist)" }}>
+                  <Icon name="bell" style={{ width: 18, height: 18 }} />
                 </button>
                 {notifMenu && (
                   <div className="absolute top-[calc(100%+8px)] right-0 card p-2 w-80 z-30">
@@ -194,7 +197,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </Link>
         ))}
         <button className="tab-item" onClick={() => setMoreSheet(true)} style={{ background: "none", border: "none" }}>
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="5" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="19" cy="12" r="1.6" /></svg>More
+          <Icon name="more" />More
         </button>
       </nav>
 
@@ -208,6 +211,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </Link>
         ))}
       </div>
+
+      {/* Moss — the workspace companion (floating helper + tour player). */}
+      <MossCompanion />
     </div>
   );
 }

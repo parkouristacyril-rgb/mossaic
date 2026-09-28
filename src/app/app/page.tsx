@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { currentOrganization } from "@/lib/org";
+import TourTile from "@/components/TourTile";
 
 export const dynamic = "force-dynamic";
 
@@ -78,11 +79,16 @@ export default async function AppHome() {
 
   return (
     <div>
-      <h1 className="font-serif text-4xl mb-2">{greeting()}.</h1>
-      <p className="text-[var(--mist)] mb-8">
-        You&apos;re not just watching. You&apos;re noticing. Your Creative Intelligence for{" "}
-        <span className="text-[var(--violet-2)]">{org.name}</span> grew today.
-      </p>
+      <div className="flex items-start justify-between gap-4 flex-wrap mb-8">
+        <div>
+          <h1 className="font-serif text-4xl mb-2">{greeting()}.</h1>
+          <p className="text-[var(--mist)]">
+            You&apos;re not just watching. You&apos;re noticing. Your Creative Intelligence for{" "}
+            <span className="text-[var(--violet-2)]">{org.name}</span> grew today.
+          </p>
+        </div>
+        <TourTile />
+      </div>
 
       <div className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
