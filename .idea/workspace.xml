@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5b984134-6043-4f44-9e59-f8959670609e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app/team/InviteButton.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app/team/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/team/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/old-globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +25,7 @@
     </colors>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="64" />
+    <option name="cachedIndexableFilesCount" value="89" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -36,6 +34,65 @@
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0000000000000002" />
+      <entry key="MS500" value="1.000716870427751" />
+      <entry key="S2" value="1.1636289585973516" />
+      <entry key="S5" value="1.484826974446964" />
+      <entry key="S10" value="1.7031656684591359" />
+      <entry key="S30" value="2.0767415485641916" />
+      <entry key="S60" value="2.377818711524486" />
+      <entry key="M2" value="2.63086657025734" />
+      <entry key="M5" value="2.8351767445219482" />
+      <entry key="M10" value="2.914403743950716" />
+      <entry key="M15" value="2.9422020145604155" />
+      <entry key="M30" value="2.9707273423106653" />
+      <entry key="H1" value="2.985268965860513" />
+      <entry key="H2" value="2.992610643520366" />
+      <entry key="H4" value="2.9962993413985033" />
+      <entry key="D1" value="2.9993823912141093" />
+      <entry key="W1" value="2.9999117497664924" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="3.910526913602982E-14" />
+      <entry key="MS500" value="0.0024799924011771374" />
+      <entry key="S2" value="0.35486978810389624" />
+      <entry key="S5" value="0.9964599060500074" />
+      <entry key="S10" value="1.4167328567715904" />
+      <entry key="S30" value="1.9641510432174294" />
+      <entry key="S60" value="2.315950353954104" />
+      <entry key="M2" value="2.597686483989694" />
+      <entry key="M5" value="2.8211903849743054" />
+      <entry key="M10" value="2.9072728910165933" />
+      <entry key="M15" value="2.9374159666177673" />
+      <entry key="M30" value="2.968317839073441" />
+      <entry key="H1" value="2.9840600164683946" />
+      <entry key="H2" value="2.9920051094774585" />
+      <entry key="H4" value="2.995996308292345" />
+      <entry key="D1" value="2.9993318486338114" />
+      <entry key="W1" value="2.999904528488832" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -69,7 +126,8 @@
     "nodejs_package_manager_path": "npm",
     "npm.Next.js: server-side.executor": "Run",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true"
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/home/mru/personal/mossaic/mosaic-nextjs/mosaic/node_modules/typescript/lib"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -77,6 +135,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
@@ -107,6 +170,7 @@
       <option name="presentableId" value="Default" />
       <updated>1790495069251</updated>
       <workItem from="1790495787165" duration="5761000" />
+      <workItem from="1790535609623" duration="6058000" />
     </task>
     <servers />
   </component>

@@ -81,7 +81,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="app-shell" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      <BgCanvas />
       <div className="app2-shell">
         {/* SIDEBAR */}
         <aside className={`app2-sidebar${collapsed ? " collapsed" : ""}`}>
