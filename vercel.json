@@ -2,8 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [
     {
-      "path": "/api/jobs/pattern-engine?organizationId=REPLACE_WITH_ORG_ID",
-      "schedule": "0 3 * * *"
+      "path": "/api/jobs/pattern-engine?organizationId=cmujuqi5s0001kb43inw6yrnb",
+      "schedule": "* */1 * * *"
     }
   ]
 }
