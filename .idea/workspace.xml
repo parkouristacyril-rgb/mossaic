@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b984134-6043-4f44-9e59-f8959670609e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/af7c4f9c-5ea1-4f63-b899-106fe73a7ee8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/old-globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,11 +23,11 @@
   </component>
   <component name="DatabaseLocalColorSettings">
     <colors>
-      <entry key="af7c4f9c-5ea1-4f63-b899-106fe73a7ee8" value="green" />
+      <entry key="bb1d7495-0e93-4f56-8a9a-b8433d162cce" value="" />
     </colors>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="89" />
+    <option name="cachedIndexableFilesCount" value="10624" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -37,23 +39,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000000000002" />
-      <entry key="MS500" value="1.000716870427751" />
-      <entry key="S2" value="1.1636289585973516" />
-      <entry key="S5" value="1.484826974446964" />
-      <entry key="S10" value="1.7031656684591359" />
-      <entry key="S30" value="2.0767415485641916" />
-      <entry key="S60" value="2.377818711524486" />
-      <entry key="M2" value="2.63086657025734" />
-      <entry key="M5" value="2.8351767445219482" />
-      <entry key="M10" value="2.914403743950716" />
-      <entry key="M15" value="2.9422020145604155" />
-      <entry key="M30" value="2.9707273423106653" />
-      <entry key="H1" value="2.985268965860513" />
-      <entry key="H2" value="2.992610643520366" />
-      <entry key="H4" value="2.9962993413985033" />
-      <entry key="D1" value="2.9993823912141093" />
-      <entry key="W1" value="2.9999117497664924" />
+      <entry key="MS100" value="1.1560413186127014" />
+      <entry key="MS500" value="1.68968046091353" />
+      <entry key="S2" value="1.911301280822793" />
+      <entry key="S5" value="1.9638085549072892" />
+      <entry key="S10" value="2.014704787758044" />
+      <entry key="S30" value="2.839340096474295" />
+      <entry key="S60" value="3.990154472126171" />
+      <entry key="M2" value="5.122929483733422" />
+      <entry key="M5" value="6.130309881231145" />
+      <entry key="M10" value="6.5421030579297526" />
+      <entry key="M15" value="6.689336912890131" />
+      <entry key="M30" value="6.84189636111483" />
+      <entry key="H1" value="6.920241107877532" />
+      <entry key="H2" value="6.959941994932471" />
+      <entry key="H4" value="6.979926131649705" />
+      <entry key="D1" value="6.996648104620211" />
+      <entry key="W1" value="6.999521004473368" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -75,23 +77,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="3.910526913602982E-14" />
-      <entry key="MS500" value="0.0024799924011771374" />
-      <entry key="S2" value="0.35486978810389624" />
-      <entry key="S5" value="0.9964599060500074" />
-      <entry key="S10" value="1.4167328567715904" />
-      <entry key="S30" value="1.9641510432174294" />
-      <entry key="S60" value="2.315950353954104" />
-      <entry key="M2" value="2.597686483989694" />
-      <entry key="M5" value="2.8211903849743054" />
-      <entry key="M10" value="2.9072728910165933" />
-      <entry key="M15" value="2.9374159666177673" />
-      <entry key="M30" value="2.968317839073441" />
-      <entry key="H1" value="2.9840600164683946" />
-      <entry key="H2" value="2.9920051094774585" />
-      <entry key="H4" value="2.995996308292345" />
-      <entry key="D1" value="2.9993318486338114" />
-      <entry key="W1" value="2.999904528488832" />
+      <entry key="MS100" value="0.22882272736204393" />
+      <entry key="MS500" value="1.193952743562902" />
+      <entry key="S2" value="1.7496482784097984" />
+      <entry key="S5" value="1.8953300422779713" />
+      <entry key="S10" value="1.9769006012193062" />
+      <entry key="S30" value="2.801155952713246" />
+      <entry key="S60" value="3.9526528683102846" />
+      <entry key="M2" value="5.095019638522084" />
+      <entry key="M5" value="6.115868955185768" />
+      <entry key="M10" value="6.53421092445159" />
+      <entry key="M15" value="6.683915237473045" />
+      <entry key="M30" value="6.839102458860374" />
+      <entry key="H1" value="6.918822820826169" />
+      <entry key="H2" value="6.959227444495393" />
+      <entry key="H4" value="6.979567495478059" />
+      <entry key="D1" value="6.9965881421155425" />
+      <entry key="W1" value="6.9995124337425665" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -104,43 +106,44 @@
     <option name="showLibraryContents" value="true" />
     <option name="sortKey" value="BY_TIME_ASCENDING" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/home/mru/personal/mossaic/mosaic-nextjs/mosaic",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.Next.js: server-side.executor": "Run",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/home/mru/personal/mossaic/mosaic-nextjs/mosaic/node_modules/typescript/lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/mru/personal/mossaic/mosaic-nextjs/mosaic&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/mru/personal/mossaic/mosaic-nextjs/mosaic/node_modules/typescript/lib&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.Next.js: server-side">
+  <component name="RunManager">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -170,7 +173,8 @@
       <option name="presentableId" value="Default" />
       <updated>1790495069251</updated>
       <workItem from="1790495787165" duration="5761000" />
-      <workItem from="1790535609623" duration="6058000" />
+      <workItem from="1790535609623" duration="7011000" />
+      <workItem from="1791358422133" duration="522000" />
     </task>
     <servers />
   </component>

@@ -39,10 +39,11 @@ export default function CapturePage() {
 
       <div className="flex gap-6 border-b border-[var(--line)] mb-8 font-mono">
         <span className={`app2-tab${mode === "single" ? " active" : ""}`} onClick={() => setMode("single")} style={{ userSelect: "none" }}>Single Observation</span>
-        <span className={`app2-tab${mode === "bulk" ? " active" : ""}`} onClick={() => setMode("bulk")} style={{ userSelect: "none" }}>Bulk Import</span>
+        {/* <span className={`app2-tab${mode === "bulk" ? " active" : ""}`} onClick={() => setMode("bulk")} style={{ userSelect: "none" }}>Bulk Import</span> */}
       </div>
 
-      {mode === "single" ? <SingleForm /> : <BulkForm />}
+      <SingleForm /> 
+      {/* {mode === "single" ? <SingleForm /> : <BulkForm />} */}
     </div>
   );
 }

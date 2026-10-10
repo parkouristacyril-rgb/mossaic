@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="NeonDB">
+<dataSource name="neondb@ep-ancient-unit-b2w8cc9f-pooler.c-6.eu-central-1.aws.neon.tech">
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.55">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <Grants>16396||-9223372036854775808|c|G
+      <Grants>1||-9223372036854775808|c|G
+1||10|c|G
+1||10|C|G
+1||10|T|G
+4||-9223372036854775808|c|G
+4||10|c|G
+4||10|C|G
+4||10|T|G
+16396||-9223372036854775808|c|G
 16396||16384|c|G
 16396||16392|c|G
 16396||16384|C|G
@@ -11,9 +19,9 @@
 16396||-9223372036854775808|T|G
 16396||16384|T|G
 16396||16392|T|G</Grants>
-      <IntrospectionStateNumber>11278</IntrospectionStateNumber>
+      <IntrospectionStateNumber>32790</IntrospectionStateNumber>
       <ServerVersion>18.6</ServerVersion>
-      <StartupTime>1790496792</StartupTime>
+      <StartupTime>1791627482</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -267,7 +275,7 @@ true America/Yellowknife
 false Antarctica/Casey
 false Antarctica/Davis
 false Antarctica/DumontDUrville
-false Antarctica/Macquarie
+true Antarctica/Macquarie
 false Antarctica/Mawson
 true Antarctica/McMurdo
 false Antarctica/Palmer
@@ -388,29 +396,29 @@ false Atlantic/Reykjavik
 false Atlantic/South_Georgia
 false Atlantic/St_Helena
 false Atlantic/Stanley
-false Australia/ACT
-false Australia/Adelaide
+true Australia/ACT
+true Australia/Adelaide
 false Australia/Brisbane
-false Australia/Broken_Hill
-false Australia/Canberra
-false Australia/Currie
+true Australia/Broken_Hill
+true Australia/Canberra
+true Australia/Currie
 false Australia/Darwin
 false Australia/Eucla
-false Australia/Hobart
-false Australia/LHI
+true Australia/Hobart
+true Australia/LHI
 false Australia/Lindeman
-false Australia/Lord_Howe
-false Australia/Melbourne
-false Australia/NSW
+true Australia/Lord_Howe
+true Australia/Melbourne
+true Australia/NSW
 false Australia/North
 false Australia/Perth
 false Australia/Queensland
-false Australia/South
-false Australia/Sydney
-false Australia/Tasmania
-false Australia/Victoria
+true Australia/South
+true Australia/Sydney
+true Australia/Tasmania
+true Australia/Victoria
 false Australia/West
-false Australia/Yancowinna
+true Australia/Yancowinna
 true BDST
 false BDT
 false BNT
@@ -625,7 +633,7 @@ false KRAST
 false KRAT
 false KST
 false Kwajalein
-false LHDT
+true LHDT
 false LHST
 false LIGT
 false LINT
@@ -713,7 +721,7 @@ false Pacific/Marquesas
 false Pacific/Midway
 false Pacific/Nauru
 false Pacific/Niue
-false Pacific/Norfolk
+true Pacific/Norfolk
 false Pacific/Noumea
 false Pacific/Pago_Pago
 false Pacific/Palau
@@ -809,7 +817,7 @@ false Zulu
 13273||10|C|G
 13273||-9223372036854775808|U|G
 13273||10|U|G</Grants>
-      <IntrospectionStateNumber>11278</IntrospectionStateNumber>
+      <IntrospectionStateNumber>32790</IntrospectionStateNumber>
       <ObjectId>16396</ObjectId>
       <OwnerName>neondb_owner</OwnerName>
     </database>
@@ -4376,11 +4384,11 @@ false Zulu
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <LastIntrospectionL1Xid>11278</LastIntrospectionL1Xid>
-      <LastIntrospectionL2Xid>11278</LastIntrospectionL2Xid>
-      <LastIntrospectionL3Xid>11278</LastIntrospectionL3Xid>
+      <LastIntrospectionL1Xid>32790</LastIntrospectionL1Xid>
+      <LastIntrospectionL2Xid>32790</LastIntrospectionL2Xid>
+      <LastIntrospectionL3Xid>32790</LastIntrospectionL3Xid>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-09-27.08:20:28</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2026-10-10.10:27:59</LastIntrospectionLocalTimestamp>
       <LastIntrospectionVersion>260210</LastIntrospectionVersion>
       <ObjectId>2200</ObjectId>
       <StateNumber>545</StateNumber>
@@ -4551,35 +4559,42 @@ FAILED</Labels>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>neondb_owner</OwnerName>
     </table>
-    <column id="297" parent="284" name="id">
+    <view id="297" parent="277" name="OrganizationInsights">
+      <DetailsLevel>3</DetailsLevel>
+      <ObjectId>32768</ObjectId>
+      <SourceTextLength>2673</SourceTextLength>
+      <StateNumber>12306</StateNumber>
+      <OwnerName>neondb_owner</OwnerName>
+    </view>
+    <column id="298" parent="284" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1039</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="298" parent="284" name="organizationId">
+    <column id="299" parent="284" name="organizationId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1039</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="299" parent="284" name="name">
+    <column id="300" parent="284" name="name">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1039</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="300" parent="284" name="type">
+    <column id="301" parent="284" name="type">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1039</StateNumber>
       <StoredType>&quot;EntityType&quot;|0s</StoredType>
       <TypeId>24612</TypeId>
     </column>
-    <column id="301" parent="284" name="createdAt">
+    <column id="302" parent="284" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
@@ -4587,7 +4602,7 @@ FAILED</Labels>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <foreign-key id="302" parent="284" name="Entity_organizationId_fkey">
+    <foreign-key id="303" parent="284" name="Entity_organizationId_fkey">
       <ColNames>organizationId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24882</ObjectId>
@@ -4597,7 +4612,7 @@ FAILED</Labels>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24639</RefTableId>
     </foreign-key>
-    <index id="303" parent="284" name="Entity_pkey">
+    <index id="304" parent="284" name="Entity_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24750</ObjectId>
@@ -4609,7 +4624,7 @@ FAILED</Labels>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="304" parent="284" name="Entity_organizationId_name_key">
+    <index id="305" parent="284" name="Entity_organizationId_name_key">
       <ColNames>organizationId
 name</ColNames>
       <NameSurrogate>1</NameSurrogate>
@@ -4624,7 +4639,7 @@ default</CollationNames>
       <CollationParentNames>pg_catalog
 pg_catalog</CollationParentNames>
     </index>
-    <index id="305" parent="284" name="Entity_organizationId_type_idx">
+    <index id="306" parent="284" name="Entity_organizationId_type_idx">
       <ColNames>organizationId
 type</ColNames>
       <ObjectId>24833</ObjectId>
@@ -4634,28 +4649,28 @@ type</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="306" parent="284" name="Entity_pkey">
+    <key id="307" parent="284" name="Entity_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24751</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1039</StateNumber>
       <UnderlyingIndexId>24750</UnderlyingIndexId>
     </key>
-    <column id="307" parent="285" name="id">
+    <column id="308" parent="285" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1043</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="308" parent="285" name="organizationId">
+    <column id="309" parent="285" name="organizationId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1043</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="309" parent="285" name="createdAt">
+    <column id="310" parent="285" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
@@ -4663,39 +4678,39 @@ type</ColNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="310" parent="285" name="campaign">
+    <column id="311" parent="285" name="campaign">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1043</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="311" parent="285" name="goal">
+    <column id="312" parent="285" name="goal">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>1043</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="312" parent="285" name="audience">
+    <column id="313" parent="285" name="audience">
       <Position>6</Position>
       <StateNumber>1043</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="313" parent="285" name="product">
+    <column id="314" parent="285" name="product">
       <Position>7</Position>
       <StateNumber>1043</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="314" parent="285" name="constraints">
+    <column id="315" parent="285" name="constraints">
       <Position>8</Position>
       <StateNumber>1043</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="315" parent="285" name="requested">
+    <column id="316" parent="285" name="requested">
       <DefaultExpression>10</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>9</Position>
@@ -4703,7 +4718,7 @@ type</ColNames>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="316" parent="285" name="IdeaBatch_organizationId_fkey">
+    <foreign-key id="317" parent="285" name="IdeaBatch_organizationId_fkey">
       <ColNames>organizationId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24912</ObjectId>
@@ -4713,7 +4728,7 @@ type</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24639</RefTableId>
     </foreign-key>
-    <index id="317" parent="285" name="IdeaBatch_pkey">
+    <index id="318" parent="285" name="IdeaBatch_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24807</ObjectId>
@@ -4725,7 +4740,7 @@ type</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="318" parent="285" name="IdeaBatch_organizationId_createdAt_idx">
+    <index id="319" parent="285" name="IdeaBatch_organizationId_createdAt_idx">
       <ColNames>organizationId
 createdAt</ColNames>
       <ObjectId>24840</ObjectId>
@@ -4735,42 +4750,42 @@ createdAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="319" parent="285" name="IdeaBatch_pkey">
+    <key id="320" parent="285" name="IdeaBatch_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24808</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1043</StateNumber>
       <UnderlyingIndexId>24807</UnderlyingIndexId>
     </key>
-    <column id="320" parent="286" name="id">
+    <column id="321" parent="286" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1033</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="321" parent="286" name="organizationId">
+    <column id="322" parent="286" name="organizationId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1033</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="322" parent="286" name="email">
+    <column id="323" parent="286" name="email">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1033</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="323" parent="286" name="name">
+    <column id="324" parent="286" name="name">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1033</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="324" parent="286" name="role">
+    <column id="325" parent="286" name="role">
       <DefaultExpression>&apos;CONTRIBUTOR&apos;::&quot;MemberRole&quot;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
@@ -4778,7 +4793,7 @@ createdAt</ColNames>
       <StoredType>&quot;MemberRole&quot;|0s</StoredType>
       <TypeId>24577</TypeId>
     </column>
-    <column id="325" parent="286" name="createdAt">
+    <column id="326" parent="286" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
@@ -4786,25 +4801,25 @@ createdAt</ColNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="326" parent="286" name="lastActiveAt">
+    <column id="327" parent="286" name="lastActiveAt">
       <Position>7</Position>
       <StateNumber>1033</StateNumber>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="327" parent="286" name="passwordHash">
+    <column id="328" parent="286" name="passwordHash">
       <Position>8</Position>
       <StateNumber>11272</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="328" parent="286" name="passwordSalt">
+    <column id="329" parent="286" name="passwordSalt">
       <Position>9</Position>
       <StateNumber>11272</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <foreign-key id="329" parent="286" name="Member_organizationId_fkey">
+    <foreign-key id="330" parent="286" name="Member_organizationId_fkey">
       <ColNames>organizationId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24842</ObjectId>
@@ -4814,7 +4829,7 @@ createdAt</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24639</RefTableId>
     </foreign-key>
-    <index id="330" parent="286" name="Member_pkey">
+    <index id="331" parent="286" name="Member_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24664</ObjectId>
@@ -4826,7 +4841,7 @@ createdAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="331" parent="286" name="Member_organizationId_email_key">
+    <index id="332" parent="286" name="Member_organizationId_email_key">
       <ColNames>organizationId
 email</ColNames>
       <NameSurrogate>1</NameSurrogate>
@@ -4841,7 +4856,7 @@ default</CollationNames>
       <CollationParentNames>pg_catalog
 pg_catalog</CollationParentNames>
     </index>
-    <index id="332" parent="286" name="Member_organizationId_idx">
+    <index id="333" parent="286" name="Member_organizationId_idx">
       <ColNames>organizationId</ColNames>
       <ObjectId>24824</ObjectId>
       <StateNumber>1046</StateNumber>
@@ -4850,41 +4865,41 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="333" parent="286" name="Member_pkey">
+    <key id="334" parent="286" name="Member_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24665</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1033</StateNumber>
       <UnderlyingIndexId>24664</UnderlyingIndexId>
     </key>
-    <column id="334" parent="287" name="id">
+    <column id="335" parent="287" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1035</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="335" parent="287" name="organizationId">
+    <column id="336" parent="287" name="organizationId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1035</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="336" parent="287" name="videoId">
+    <column id="337" parent="287" name="videoId">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1035</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="337" parent="287" name="memberId">
+    <column id="338" parent="287" name="memberId">
       <Position>4</Position>
       <StateNumber>1035</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="338" parent="287" name="createdAt">
+    <column id="339" parent="287" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
@@ -4892,25 +4907,25 @@ pg_catalog</CollationParentNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="339" parent="287" name="reaction">
+    <column id="340" parent="287" name="reaction">
       <Position>6</Position>
       <StateNumber>1035</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="340" parent="287" name="firstImpression">
+    <column id="341" parent="287" name="firstImpression">
       <Position>7</Position>
       <StateNumber>1035</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="341" parent="287" name="whyItWorked">
+    <column id="342" parent="287" name="whyItWorked">
       <Position>8</Position>
       <StateNumber>1035</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="342" parent="287" name="source">
+    <column id="343" parent="287" name="source">
       <DefaultExpression>&apos;WORKSPACE&apos;::&quot;ObservationSource&quot;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>9</Position>
@@ -4918,7 +4933,7 @@ pg_catalog</CollationParentNames>
       <StoredType>&quot;ObservationSource&quot;|0s</StoredType>
       <TypeId>24604</TypeId>
     </column>
-    <foreign-key id="343" parent="287" name="Observation_organizationId_fkey">
+    <foreign-key id="344" parent="287" name="Observation_organizationId_fkey">
       <ColNames>organizationId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24852</ObjectId>
@@ -4928,7 +4943,7 @@ pg_catalog</CollationParentNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24639</RefTableId>
     </foreign-key>
-    <foreign-key id="344" parent="287" name="Observation_videoId_fkey">
+    <foreign-key id="345" parent="287" name="Observation_videoId_fkey">
       <ColNames>videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24857</ObjectId>
@@ -4938,7 +4953,7 @@ pg_catalog</CollationParentNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24666</RefTableId>
     </foreign-key>
-    <foreign-key id="345" parent="287" name="Observation_memberId_fkey">
+    <foreign-key id="346" parent="287" name="Observation_memberId_fkey">
       <ColNames>memberId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24862</ObjectId>
@@ -4948,7 +4963,7 @@ pg_catalog</CollationParentNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24651</RefTableId>
     </foreign-key>
-    <index id="346" parent="287" name="Observation_pkey">
+    <index id="347" parent="287" name="Observation_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24695</ObjectId>
@@ -4960,7 +4975,7 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="347" parent="287" name="Observation_organizationId_createdAt_idx">
+    <index id="348" parent="287" name="Observation_organizationId_createdAt_idx">
       <ColNames>organizationId
 createdAt</ColNames>
       <ObjectId>24828</ObjectId>
@@ -4970,7 +4985,7 @@ createdAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="348" parent="287" name="Observation_videoId_idx">
+    <index id="349" parent="287" name="Observation_videoId_idx">
       <ColNames>videoId</ColNames>
       <ObjectId>24829</ObjectId>
       <StateNumber>1051</StateNumber>
@@ -4979,35 +4994,35 @@ createdAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="349" parent="287" name="Observation_pkey">
+    <key id="350" parent="287" name="Observation_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24696</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1035</StateNumber>
       <UnderlyingIndexId>24695</UnderlyingIndexId>
     </key>
-    <column id="350" parent="288" name="id">
+    <column id="351" parent="288" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1032</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="351" parent="288" name="name">
+    <column id="352" parent="288" name="name">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1032</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="352" parent="288" name="slug">
+    <column id="353" parent="288" name="slug">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1032</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="353" parent="288" name="createdAt">
+    <column id="354" parent="288" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>4</Position>
@@ -5015,7 +5030,7 @@ createdAt</ColNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <index id="354" parent="288" name="Organization_pkey">
+    <index id="355" parent="288" name="Organization_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24649</ObjectId>
@@ -5027,7 +5042,7 @@ createdAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="355" parent="288" name="Organization_slug_key">
+    <index id="356" parent="288" name="Organization_slug_key">
       <ColNames>slug</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24823</ObjectId>
@@ -5038,42 +5053,42 @@ createdAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="356" parent="288" name="Organization_pkey">
+    <key id="357" parent="288" name="Organization_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24650</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1032</StateNumber>
       <UnderlyingIndexId>24649</UnderlyingIndexId>
     </key>
-    <column id="357" parent="289" name="id">
+    <column id="358" parent="289" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1041</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="358" parent="289" name="organizationId">
+    <column id="359" parent="289" name="organizationId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1041</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="359" parent="289" name="name">
+    <column id="360" parent="289" name="name">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1041</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="360" parent="289" name="description">
+    <column id="361" parent="289" name="description">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1041</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="361" parent="289" name="status">
+    <column id="362" parent="289" name="status">
       <DefaultExpression>&apos;EMERGING&apos;::&quot;PatternStatus&quot;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>5</Position>
@@ -5081,27 +5096,27 @@ createdAt</ColNames>
       <StoredType>&quot;PatternStatus&quot;|0s</StoredType>
       <TypeId>24632</TypeId>
     </column>
-    <column id="362" parent="289" name="confidence">
+    <column id="363" parent="289" name="confidence">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StateNumber>1041</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="363" parent="289" name="performanceLift">
+    <column id="364" parent="289" name="performanceLift">
       <Position>7</Position>
       <StateNumber>1041</StateNumber>
       <StoredType>double precision|0s</StoredType>
       <TypeId>701</TypeId>
     </column>
-    <column id="364" parent="289" name="recommendedActions">
+    <column id="365" parent="289" name="recommendedActions">
       <DefaultExpression>ARRAY[]::text[]</DefaultExpression>
       <Position>8</Position>
       <StateNumber>1041</StateNumber>
       <StoredType>text[]|0s</StoredType>
       <TypeId>1009</TypeId>
     </column>
-    <column id="365" parent="289" name="createdAt">
+    <column id="366" parent="289" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>9</Position>
@@ -5109,14 +5124,14 @@ createdAt</ColNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="366" parent="289" name="updatedAt">
+    <column id="367" parent="289" name="updatedAt">
       <NotNull>1</NotNull>
       <Position>10</Position>
       <StateNumber>1041</StateNumber>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <foreign-key id="367" parent="289" name="Pattern_organizationId_fkey">
+    <foreign-key id="368" parent="289" name="Pattern_organizationId_fkey">
       <ColNames>organizationId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24897</ObjectId>
@@ -5126,7 +5141,7 @@ createdAt</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24639</RefTableId>
     </foreign-key>
-    <index id="368" parent="289" name="Pattern_pkey">
+    <index id="369" parent="289" name="Pattern_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24779</ObjectId>
@@ -5138,7 +5153,7 @@ createdAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="369" parent="289" name="Pattern_organizationId_name_key">
+    <index id="370" parent="289" name="Pattern_organizationId_name_key">
       <ColNames>organizationId
 name</ColNames>
       <NameSurrogate>1</NameSurrogate>
@@ -5153,7 +5168,7 @@ default</CollationNames>
       <CollationParentNames>pg_catalog
 pg_catalog</CollationParentNames>
     </index>
-    <index id="370" parent="289" name="Pattern_organizationId_status_idx">
+    <index id="371" parent="289" name="Pattern_organizationId_status_idx">
       <ColNames>organizationId
 status</ColNames>
       <ObjectId>24836</ObjectId>
@@ -5163,48 +5178,48 @@ status</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="371" parent="289" name="Pattern_pkey">
+    <key id="372" parent="289" name="Pattern_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24780</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1041</StateNumber>
       <UnderlyingIndexId>24779</UnderlyingIndexId>
     </key>
-    <column id="372" parent="290" name="id">
+    <column id="373" parent="290" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1042</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="373" parent="290" name="patternId">
+    <column id="374" parent="290" name="patternId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1042</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="374" parent="290" name="videoId">
+    <column id="375" parent="290" name="videoId">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1042</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="375" parent="290" name="strength">
+    <column id="376" parent="290" name="strength">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1042</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="376" parent="290" name="note">
+    <column id="377" parent="290" name="note">
       <Position>5</Position>
       <StateNumber>1042</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="377" parent="290" name="createdAt">
+    <column id="378" parent="290" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
@@ -5212,7 +5227,7 @@ status</ColNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <foreign-key id="378" parent="290" name="PatternEvidence_patternId_fkey">
+    <foreign-key id="379" parent="290" name="PatternEvidence_patternId_fkey">
       <ColNames>patternId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24902</ObjectId>
@@ -5222,7 +5237,7 @@ status</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24763</RefTableId>
     </foreign-key>
-    <foreign-key id="379" parent="290" name="PatternEvidence_videoId_fkey">
+    <foreign-key id="380" parent="290" name="PatternEvidence_videoId_fkey">
       <ColNames>videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24907</ObjectId>
@@ -5232,7 +5247,7 @@ status</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24666</RefTableId>
     </foreign-key>
-    <index id="380" parent="290" name="PatternEvidence_pkey">
+    <index id="381" parent="290" name="PatternEvidence_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24792</ObjectId>
@@ -5244,7 +5259,7 @@ status</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="381" parent="290" name="PatternEvidence_patternId_videoId_key">
+    <index id="382" parent="290" name="PatternEvidence_patternId_videoId_key">
       <ColNames>patternId
 videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
@@ -5259,7 +5274,7 @@ default</CollationNames>
       <CollationParentNames>pg_catalog
 pg_catalog</CollationParentNames>
     </index>
-    <index id="382" parent="290" name="PatternEvidence_videoId_idx">
+    <index id="383" parent="290" name="PatternEvidence_videoId_idx">
       <ColNames>videoId</ColNames>
       <ObjectId>24838</ObjectId>
       <StateNumber>1060</StateNumber>
@@ -5268,28 +5283,28 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="383" parent="290" name="PatternEvidence_pkey">
+    <key id="384" parent="290" name="PatternEvidence_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24793</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1042</StateNumber>
       <UnderlyingIndexId>24792</UnderlyingIndexId>
     </key>
-    <column id="384" parent="291" name="id">
+    <column id="385" parent="291" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1037</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="385" parent="291" name="videoId">
+    <column id="386" parent="291" name="videoId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1037</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="386" parent="291" name="fetchedAt">
+    <column id="387" parent="291" name="fetchedAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
@@ -5297,43 +5312,43 @@ pg_catalog</CollationParentNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="387" parent="291" name="playCount">
+    <column id="388" parent="291" name="playCount">
       <Position>4</Position>
       <StateNumber>1037</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="388" parent="291" name="diggCount">
+    <column id="389" parent="291" name="diggCount">
       <Position>5</Position>
       <StateNumber>1037</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="389" parent="291" name="commentCount">
+    <column id="390" parent="291" name="commentCount">
       <Position>6</Position>
       <StateNumber>1037</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="390" parent="291" name="shareCount">
+    <column id="391" parent="291" name="shareCount">
       <Position>7</Position>
       <StateNumber>1037</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="391" parent="291" name="collectCount">
+    <column id="392" parent="291" name="collectCount">
       <Position>8</Position>
       <StateNumber>1037</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="392" parent="291" name="authorFans">
+    <column id="393" parent="291" name="authorFans">
       <Position>9</Position>
       <StateNumber>1037</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="393" parent="291" name="complete">
+    <column id="394" parent="291" name="complete">
       <DefaultExpression>false</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>10</Position>
@@ -5341,7 +5356,7 @@ pg_catalog</CollationParentNames>
       <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
-    <foreign-key id="394" parent="291" name="PerformanceSnapshot_videoId_fkey">
+    <foreign-key id="395" parent="291" name="PerformanceSnapshot_videoId_fkey">
       <ColNames>videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24872</ObjectId>
@@ -5351,7 +5366,7 @@ pg_catalog</CollationParentNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24666</RefTableId>
     </foreign-key>
-    <index id="395" parent="291" name="PerformanceSnapshot_pkey">
+    <index id="396" parent="291" name="PerformanceSnapshot_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24721</ObjectId>
@@ -5363,7 +5378,7 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="396" parent="291" name="PerformanceSnapshot_videoId_fetchedAt_idx">
+    <index id="397" parent="291" name="PerformanceSnapshot_videoId_fetchedAt_idx">
       <ColNames>videoId
 fetchedAt</ColNames>
       <ObjectId>24831</ObjectId>
@@ -5373,49 +5388,49 @@ fetchedAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="397" parent="291" name="PerformanceSnapshot_pkey">
+    <key id="398" parent="291" name="PerformanceSnapshot_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24722</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1037</StateNumber>
       <UnderlyingIndexId>24721</UnderlyingIndexId>
     </key>
-    <column id="398" parent="292" name="id">
+    <column id="399" parent="292" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="399" parent="292" name="organizationId">
+    <column id="400" parent="292" name="organizationId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="400" parent="292" name="externalId">
+    <column id="401" parent="292" name="externalId">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="401" parent="292" name="platform">
+    <column id="402" parent="292" name="platform">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>&quot;Platform&quot;|0s</StoredType>
       <TypeId>24584</TypeId>
     </column>
-    <column id="402" parent="292" name="url">
+    <column id="403" parent="292" name="url">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="403" parent="292" name="createdAt">
+    <column id="404" parent="292" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
@@ -5423,14 +5438,14 @@ fetchedAt</ColNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="404" parent="292" name="updatedAt">
+    <column id="405" parent="292" name="updatedAt">
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="405" parent="292" name="status">
+    <column id="406" parent="292" name="status">
       <DefaultExpression>&apos;PENDING&apos;::&quot;VideoStatus&quot;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>8</Position>
@@ -5438,43 +5453,43 @@ fetchedAt</ColNames>
       <StoredType>&quot;VideoStatus&quot;|0s</StoredType>
       <TypeId>24592</TypeId>
     </column>
-    <column id="406" parent="292" name="statusNote">
+    <column id="407" parent="292" name="statusNote">
       <Position>9</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="407" parent="292" name="analyzedAt">
+    <column id="408" parent="292" name="analyzedAt">
       <Position>10</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="408" parent="292" name="creatorHandle">
+    <column id="409" parent="292" name="creatorHandle">
       <Position>11</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="409" parent="292" name="creatorFollowers">
+    <column id="410" parent="292" name="creatorFollowers">
       <Position>12</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="410" parent="292" name="caption">
+    <column id="411" parent="292" name="caption">
       <Position>13</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="411" parent="292" name="durationSeconds">
+    <column id="412" parent="292" name="durationSeconds">
       <Position>14</Position>
       <StateNumber>1034</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="412" parent="292" name="Video_organizationId_fkey">
+    <foreign-key id="413" parent="292" name="Video_organizationId_fkey">
       <ColNames>organizationId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24847</ObjectId>
@@ -5484,7 +5499,7 @@ fetchedAt</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24639</RefTableId>
     </foreign-key>
-    <index id="413" parent="292" name="Video_pkey">
+    <index id="414" parent="292" name="Video_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24681</ObjectId>
@@ -5496,7 +5511,7 @@ fetchedAt</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="414" parent="292" name="Video_organizationId_platform_externalId_key">
+    <index id="415" parent="292" name="Video_organizationId_platform_externalId_key">
       <ColNames>organizationId
 platform
 externalId</ColNames>
@@ -5515,7 +5530,7 @@ pg_catalog</CollationParentNames>
 
 100</CollationIds>
     </index>
-    <index id="415" parent="292" name="Video_organizationId_status_idx">
+    <index id="416" parent="292" name="Video_organizationId_status_idx">
       <ColNames>organizationId
 status</ColNames>
       <ObjectId>24826</ObjectId>
@@ -5525,155 +5540,155 @@ status</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="416" parent="292" name="Video_pkey">
+    <key id="417" parent="292" name="Video_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24682</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1034</StateNumber>
       <UnderlyingIndexId>24681</UnderlyingIndexId>
     </key>
-    <column id="417" parent="293" name="id">
+    <column id="418" parent="293" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="418" parent="293" name="videoId">
+    <column id="419" parent="293" name="videoId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="419" parent="293" name="hook">
+    <column id="420" parent="293" name="hook">
       <Position>3</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="420" parent="293" name="pacing">
+    <column id="421" parent="293" name="pacing">
       <Position>4</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="421" parent="293" name="visualComposition">
+    <column id="422" parent="293" name="visualComposition">
       <Position>5</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="422" parent="293" name="cameraWork">
+    <column id="423" parent="293" name="cameraWork">
       <Position>6</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="423" parent="293" name="sceneEnvironment">
+    <column id="424" parent="293" name="sceneEnvironment">
       <Position>7</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="424" parent="293" name="subjectPeople">
+    <column id="425" parent="293" name="subjectPeople">
       <Position>8</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="425" parent="293" name="objectProduct">
+    <column id="426" parent="293" name="objectProduct">
       <Position>9</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="426" parent="293" name="voiceTone">
+    <column id="427" parent="293" name="voiceTone">
       <Position>10</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="427" parent="293" name="music">
+    <column id="428" parent="293" name="music">
       <Position>11</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="428" parent="293" name="soundDesign">
+    <column id="429" parent="293" name="soundDesign">
       <Position>12</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="429" parent="293" name="audioTriggers">
+    <column id="430" parent="293" name="audioTriggers">
       <Position>13</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="430" parent="293" name="onScreenText">
+    <column id="431" parent="293" name="onScreenText">
       <Position>14</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="431" parent="293" name="spokenTopic">
+    <column id="432" parent="293" name="spokenTopic">
       <Position>15</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="432" parent="293" name="captionStyle">
+    <column id="433" parent="293" name="captionStyle">
       <Position>16</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="433" parent="293" name="intent">
+    <column id="434" parent="293" name="intent">
       <Position>17</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="434" parent="293" name="sentiment">
+    <column id="435" parent="293" name="sentiment">
       <Position>18</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="435" parent="293" name="emotionalArc">
+    <column id="436" parent="293" name="emotionalArc">
       <Position>19</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="436" parent="293" name="seoKeywords">
+    <column id="437" parent="293" name="seoKeywords">
       <DefaultExpression>ARRAY[]::text[]</DefaultExpression>
       <Position>20</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>text[]|0s</StoredType>
       <TypeId>1009</TypeId>
     </column>
-    <column id="437" parent="293" name="brandPsychology">
+    <column id="438" parent="293" name="brandPsychology">
       <Position>21</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>jsonb|0s</StoredType>
       <TypeId>3802</TypeId>
     </column>
-    <column id="438" parent="293" name="predictedTriggers">
+    <column id="439" parent="293" name="predictedTriggers">
       <Position>22</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>jsonb|0s</StoredType>
       <TypeId>3802</TypeId>
     </column>
-    <column id="439" parent="293" name="raw">
+    <column id="440" parent="293" name="raw">
       <Position>23</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>jsonb|0s</StoredType>
       <TypeId>3802</TypeId>
     </column>
-    <column id="440" parent="293" name="createdAt">
+    <column id="441" parent="293" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>24</Position>
@@ -5681,14 +5696,14 @@ status</ColNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="441" parent="293" name="updatedAt">
+    <column id="442" parent="293" name="updatedAt">
       <NotNull>1</NotNull>
       <Position>25</Position>
       <StateNumber>1036</StateNumber>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <foreign-key id="442" parent="293" name="VideoAnalysis_videoId_fkey">
+    <foreign-key id="443" parent="293" name="VideoAnalysis_videoId_fkey">
       <ColNames>videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24867</ObjectId>
@@ -5698,7 +5713,7 @@ status</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24666</RefTableId>
     </foreign-key>
-    <index id="443" parent="293" name="VideoAnalysis_pkey">
+    <index id="444" parent="293" name="VideoAnalysis_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24708</ObjectId>
@@ -5710,7 +5725,7 @@ status</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="444" parent="293" name="VideoAnalysis_videoId_key">
+    <index id="445" parent="293" name="VideoAnalysis_videoId_key">
       <ColNames>videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24830</ObjectId>
@@ -5721,28 +5736,28 @@ status</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="445" parent="293" name="VideoAnalysis_pkey">
+    <key id="446" parent="293" name="VideoAnalysis_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24709</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1036</StateNumber>
       <UnderlyingIndexId>24708</UnderlyingIndexId>
     </key>
-    <column id="446" parent="294" name="videoId">
+    <column id="447" parent="294" name="videoId">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1040</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="447" parent="294" name="entityId">
+    <column id="448" parent="294" name="entityId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1040</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="448" parent="294" name="mentions">
+    <column id="449" parent="294" name="mentions">
       <DefaultExpression>1</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
@@ -5750,7 +5765,7 @@ status</ColNames>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="449" parent="294" name="VideoEntity_videoId_fkey">
+    <foreign-key id="450" parent="294" name="VideoEntity_videoId_fkey">
       <ColNames>videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24887</ObjectId>
@@ -5760,7 +5775,7 @@ status</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24666</RefTableId>
     </foreign-key>
-    <foreign-key id="450" parent="294" name="VideoEntity_entityId_fkey">
+    <foreign-key id="451" parent="294" name="VideoEntity_entityId_fkey">
       <ColNames>entityId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24892</ObjectId>
@@ -5770,7 +5785,7 @@ status</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24739</RefTableId>
     </foreign-key>
-    <index id="451" parent="294" name="VideoEntity_pkey">
+    <index id="452" parent="294" name="VideoEntity_pkey">
       <ColNames>videoId
 entityId</ColNames>
       <NameSurrogate>1</NameSurrogate>
@@ -5786,7 +5801,7 @@ default</CollationNames>
       <CollationParentNames>pg_catalog
 pg_catalog</CollationParentNames>
     </index>
-    <index id="452" parent="294" name="VideoEntity_entityId_idx">
+    <index id="453" parent="294" name="VideoEntity_entityId_idx">
       <ColNames>entityId</ColNames>
       <ObjectId>24835</ObjectId>
       <StateNumber>1057</StateNumber>
@@ -5795,73 +5810,73 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="453" parent="294" name="VideoEntity_pkey">
+    <key id="454" parent="294" name="VideoEntity_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24762</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1040</StateNumber>
       <UnderlyingIndexId>24761</UnderlyingIndexId>
     </key>
-    <column id="454" parent="295" name="id">
+    <column id="455" parent="295" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="455" parent="295" name="batchId">
+    <column id="456" parent="295" name="batchId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="456" parent="295" name="title">
+    <column id="457" parent="295" name="title">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="457" parent="295" name="concept">
+    <column id="458" parent="295" name="concept">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="458" parent="295" name="hook">
+    <column id="459" parent="295" name="hook">
       <Position>5</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="459" parent="295" name="lengthEstimate">
+    <column id="460" parent="295" name="lengthEstimate">
       <Position>6</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="460" parent="295" name="predictedLift">
+    <column id="461" parent="295" name="predictedLift">
       <Position>7</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="461" parent="295" name="rationale">
+    <column id="462" parent="295" name="rationale">
       <Position>8</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="462" parent="295" name="basedOnPatterns">
+    <column id="463" parent="295" name="basedOnPatterns">
       <DefaultExpression>ARRAY[]::text[]</DefaultExpression>
       <Position>9</Position>
       <StateNumber>1044</StateNumber>
       <StoredType>text[]|0s</StoredType>
       <TypeId>1009</TypeId>
     </column>
-    <column id="463" parent="295" name="createdAt">
+    <column id="464" parent="295" name="createdAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>10</Position>
@@ -5869,7 +5884,7 @@ pg_catalog</CollationParentNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <foreign-key id="464" parent="295" name="VideoIdea_batchId_fkey">
+    <foreign-key id="465" parent="295" name="VideoIdea_batchId_fkey">
       <ColNames>batchId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24917</ObjectId>
@@ -5879,7 +5894,7 @@ pg_catalog</CollationParentNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24794</RefTableId>
     </foreign-key>
-    <index id="465" parent="295" name="VideoIdea_pkey">
+    <index id="466" parent="295" name="VideoIdea_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24821</ObjectId>
@@ -5891,7 +5906,7 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="466" parent="295" name="VideoIdea_batchId_idx">
+    <index id="467" parent="295" name="VideoIdea_batchId_idx">
       <ColNames>batchId</ColNames>
       <ObjectId>24841</ObjectId>
       <StateNumber>1063</StateNumber>
@@ -5900,69 +5915,69 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="467" parent="295" name="VideoIdea_pkey">
+    <key id="468" parent="295" name="VideoIdea_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24822</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1044</StateNumber>
       <UnderlyingIndexId>24821</UnderlyingIndexId>
     </key>
-    <column id="468" parent="296" name="id">
+    <column id="469" parent="296" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1038</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="469" parent="296" name="videoId">
+    <column id="470" parent="296" name="videoId">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1038</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="470" parent="296" name="viralityIndex">
+    <column id="471" parent="296" name="viralityIndex">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1038</StateNumber>
       <StoredType>double precision|0s</StoredType>
       <TypeId>701</TypeId>
     </column>
-    <column id="471" parent="296" name="algorithmVerdict">
+    <column id="472" parent="296" name="algorithmVerdict">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1038</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="472" parent="296" name="distributionScore">
+    <column id="473" parent="296" name="distributionScore">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>1038</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="473" parent="296" name="replicationOdds">
+    <column id="474" parent="296" name="replicationOdds">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StateNumber>1038</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="474" parent="296" name="confidence">
+    <column id="475" parent="296" name="confidence">
       <NotNull>1</NotNull>
       <Position>7</Position>
       <StateNumber>1038</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="475" parent="296" name="engagementRate">
+    <column id="476" parent="296" name="engagementRate">
       <Position>8</Position>
       <StateNumber>1038</StateNumber>
       <StoredType>double precision|0s</StoredType>
       <TypeId>701</TypeId>
     </column>
-    <column id="476" parent="296" name="computedAt">
+    <column id="477" parent="296" name="computedAt">
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>9</Position>
@@ -5970,7 +5985,7 @@ pg_catalog</CollationParentNames>
       <StoredType>timestamp(3)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <foreign-key id="477" parent="296" name="VideoScore_videoId_fkey">
+    <foreign-key id="478" parent="296" name="VideoScore_videoId_fkey">
       <ColNames>videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24877</ObjectId>
@@ -5980,7 +5995,7 @@ pg_catalog</CollationParentNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>24666</RefTableId>
     </foreign-key>
-    <index id="478" parent="296" name="VideoScore_pkey">
+    <index id="479" parent="296" name="VideoScore_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24737</ObjectId>
@@ -5992,7 +6007,7 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <index id="479" parent="296" name="VideoScore_videoId_key">
+    <index id="480" parent="296" name="VideoScore_videoId_key">
       <ColNames>videoId</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24832</ObjectId>
@@ -6003,12 +6018,112 @@ pg_catalog</CollationParentNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="480" parent="296" name="VideoScore_pkey">
+    <key id="481" parent="296" name="VideoScore_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>24738</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1038</StateNumber>
       <UnderlyingIndexId>24737</UnderlyingIndexId>
     </key>
+    <column id="482" parent="297" name="organizationId">
+      <Position>1</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>text|0s</StoredType>
+    </column>
+    <column id="483" parent="297" name="organizationName">
+      <Position>2</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>text|0s</StoredType>
+    </column>
+    <column id="484" parent="297" name="organizationCreatedAt">
+      <Position>3</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>timestamp(3)|0s</StoredType>
+    </column>
+    <column id="485" parent="297" name="videoCount">
+      <Position>4</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="486" parent="297" name="analyzedVideoCount">
+      <Position>5</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="487" parent="297" name="processingVideoCount">
+      <Position>6</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="488" parent="297" name="observationCount">
+      <Position>7</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="489" parent="297" name="observationsLast7d">
+      <Position>8</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="490" parent="297" name="observationsLast30d">
+      <Position>9</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="491" parent="297" name="lastObservationAt">
+      <Position>10</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>timestamp|0s</StoredType>
+    </column>
+    <column id="492" parent="297" name="patternCount">
+      <Position>11</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="493" parent="297" name="confirmedPatternCount">
+      <Position>12</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="494" parent="297" name="emergingPatternCount">
+      <Position>13</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="495" parent="297" name="fadingPatternCount">
+      <Position>14</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="496" parent="297" name="avgConfidence">
+      <Position>15</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>double precision|0s</StoredType>
+    </column>
+    <column id="497" parent="297" name="avgPerformanceLift">
+      <Position>16</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>double precision|0s</StoredType>
+    </column>
+    <column id="498" parent="297" name="entityCount">
+      <Position>17</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="499" parent="297" name="ideaBatchCount">
+      <Position>18</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="500" parent="297" name="ideaCount">
+      <Position>19</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
+    <column id="501" parent="297" name="memberCount">
+      <Position>20</Position>
+      <StateNumber>12306</StateNumber>
+      <StoredType>integer|0s</StoredType>
+    </column>
   </database-model>
 </dataSource>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="NeonDB" uuid="af7c4f9c-5ea1-4f63-b899-106fe73a7ee8">
-      <driver-ref>postgresql.aws_wrapper</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>software.amazon.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:aws-wrapper:postgresql://ep-ancient-unit-b2w8cc9f-pooler.c-6.eu-central-1.aws.neon.tech:5432/neondb</jdbc-url>
+    <data-source source="LOCAL" name="neondb@ep-ancient-unit-b2w8cc9f-pooler.c-6.eu-central-1.aws.neon.tech" uuid="bb1d7495-0e93-4f56-8a9a-b8433d162cce">
+      <driver-ref>postgresql</driver-ref>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ep-ancient-unit-b2w8cc9f-pooler.c-6.eu-central-1.aws.neon.tech:5432/neondb</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
