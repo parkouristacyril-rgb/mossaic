@@ -3,7 +3,7 @@
   "crons": [
     {
       "path": "/api/jobs/pattern-engine?organizationId=cmujuqi5s0001kb43inw6yrnb",
-      "schedule": "* */1 * * *"
+      "schedule": "0 3 * * *"
     }
   ]
 }
