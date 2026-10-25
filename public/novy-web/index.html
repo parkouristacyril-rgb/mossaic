@@ -9278,35 +9278,161 @@ html:has(#login-view.open) #docs-view{ visibility:hidden; }
        team: [ { email, role, status } ],
        observations: [ { url, note, at } ] }
    ===================================================================== */
-window.MOSSAIC_BACKEND = {
-  /* create a workspace         ({ org, email, pass, plan })  -> { account } | { error } */
-  signUp: null,
-  /* sign in                     (email, pass)                 -> { account } | { error } */
-  signIn: null,
-  /* restore a session on load   ()                            -> { account } | null      */
-  resume: null,
-  /* sign out                    ()                            -> anything                */
-  signOut: null,
-  /* a video / observation was logged (Capture, Shortcut, bulk import)
-                                 (observations[], account)     -> anything                */
-  capture: null,
-  /* invite a teammate           (email, account)              -> anything | { error }    */
-  invite: null,
-  /* settings saved              ({ org, handles }, account)   -> anything | { error }    */
-  saveSettings: null,
-  /* payment — create a Stripe Checkout Session on your server and return its url
-       ({ plan, email, successUrl, cancelUrl }, account)       -> { url } | { paid:true } | { error }
-     Stripe sends the person back to successUrl (?checkout=success&session_id=…) or
-     cancelUrl (?checkout=cancel). Activate the subscription from Stripe's webhook. */
-  checkout: null,
-  /* plan changed in Pricing     (planId, account)             -> anything | { error }    */
-  changePlan: null,
-  /* "Talk to Sales"             (account | null)              -> anything | { error }    */
-  contactSales: null,
-  /* Video Ideas → Generate      ({ campaign, count, goal, audience, product, avoid }, account)
-                                 -> { ideas: [ { title, why, pattern } ] } | { error }     */
-  generateIdeas: null
-};
+window.MOSSAIC_BACKEND = (function(){
+  /* Martin's backend runs on the same domain (/api/*); the session is an httpOnly cookie. */
+  function api(method, path, body){
+    var opt = { method: method, credentials: 'same-origin', headers: {} };
+    if(body !== undefined){ opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
+    return fetch(path, opt).then(function(res){
+      return res.json().catch(function(){ return {}; }).then(function(data){
+        if(!res.ok) return { error: (data && data.error) || 'Something went wrong. Try again.', status: res.status };
+        return data || {};
+      });
+    }, function(){ return { error: 'Could not reach Mossaic. Try again in a moment.', status: 0 }; });
+  }
+  function clean(v){ v = String(v == null ? '' : v).trim(); return v ? v : undefined; }
+  function cached(email){ try{ return (window.LIVE && window.LIVE.find(email)) || {}; }catch(e){ return {}; } }
+  function toObs(list){
+    return (list || []).map(function(o){
+      return { url: (o.video && o.video.url) || '', note: o.firstImpression || o.reaction || o.whyItWorked || '', at: o.createdAt };
+    }).reverse();
+  }
+  /* session + observations from the server -> the account object the page expects.
+     Plan, handles and the invited list are not stored on the server yet, so they are kept in this browser. */
+  function loadAccount(extra){
+    return api('GET', '/api/session').then(function(s){
+      if(!s || s.error || !s.member) return { error: (s && s.error) || 'Not signed in.', status: s && s.status };
+      return api('GET', '/api/observations').then(function(o){
+        var c = cached(s.member.email);
+        return { account: {
+          email: s.member.email,
+          name: s.member.name,
+          role: s.member.role,
+          org: s.name,
+          plan: (extra && extra.plan) || c.plan || 'Growth',
+          handles: c.handles || { tiktok: '', instagram: '' },
+          team: c.team || [],
+          seen: c.seen || {},
+          billing: c.billing,
+          createdAt: c.createdAt || new Date().toISOString(),
+          observations: (o && !o.error) ? toObs(o.observations) : (c.observations || [])
+        } };
+      });
+    });
+  }
+  function tempPass(){
+    var chars = 'abcdefghjkmnpqrstuvwxyz23456789', out = '', a = new Uint32Array(10);
+    crypto.getRandomValues(a);
+    for(var i = 0; i < a.length; i++) out += chars[a[i] % chars.length];
+    return out;
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+  /* small glass note that stays until closed (no browser dialogs) */
+  function note(html){
+    var n = document.getElementById('m-be-note');
+    if(!n){
+      n = document.createElement('div'); n.id = 'm-be-note'; n.setAttribute('role', 'status');
+      n.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:99999;max-width:min(92vw,460px);' +
+        'padding:16px 18px;border-radius:18px;background:rgba(20,16,36,.92);color:#fff;font:14px/1.5 system-ui,sans-serif;' +
+        'box-shadow:0 18px 48px -16px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.12);backdrop-filter:blur(14px)';
+      document.body.appendChild(n);
+    }
+    n.innerHTML = html + '<button type="button" style="display:block;margin-top:10px;padding:6px 14px;border-radius:999px;border:0;background:#7b2ff7;color:#fff;cursor:pointer" onclick="this.parentNode.remove()">OK</button>';
+  }
+
+  /* the page restored a session from this browser: check it is still valid on the server */
+  addEventListener('load', function(){
+    setTimeout(function(){
+      var L = window.LIVE; if(!L || L.mode !== 'live' || !L.account) return;
+      loadAccount().then(function(r){
+        if(r && r.account){
+          L.adopt(r.account);
+          if(window.__livePaint) window.__livePaint();
+          if(window.__obClientPages) window.__obClientPages();
+        } else if(r && r.status === 401){
+          L.signOut(); location.reload();
+        }
+      });
+    }, 700);
+  });
+
+  return {
+    /* create a workspace         ({ org, email, pass, plan })  -> { account } | { error } */
+    signUp: function(o){
+      return api('POST', '/api/auth/signup', {
+        name: String(o.email).split('@')[0], email: o.email, password: o.pass, organizationName: o.org
+      }).then(function(r){ return r.error ? r : loadAccount({ plan: o.plan }); });
+    },
+    /* sign in                     (email, pass)                 -> { account } | { error } */
+    signIn: function(email, pass){
+      return api('POST', '/api/auth/login', { email: email, password: pass })
+        .then(function(r){ return r.error ? r : loadAccount(); });
+    },
+    /* restore a session on load   ()                            -> { account } | null      */
+    resume: function(){
+      return loadAccount().then(function(r){ return r && r.account ? r : null; });
+    },
+    /* sign out                    ()                            -> anything                */
+    signOut: function(){ return api('POST', '/api/auth/logout'); },
+    /* a video / observation was logged (Capture, Shortcut, bulk import) */
+    capture: function(list){
+      var withUrl = (list || []).filter(function(o){ return o && clean(o.url); });
+      if(!withUrl.length) return null;
+      var req = withUrl.length === 1
+        ? api('POST', '/api/observations', { link: clean(withUrl[0].url), firstImpression: clean(withUrl[0].note), source: 'WORKSPACE' })
+        : api('POST', '/api/observations', { links: withUrl.map(function(o){ return clean(o.url); }) });
+      return req.then(function(r){
+        if(window.mToast){
+          if(r && r.error) mToast(r.error);
+          else if(r && r.rejected && r.rejected.length) mToast(r.rejected.length + ' link(s) were not accepted: ' + r.rejected[0].reason);
+        }
+        return r;
+      });
+    },
+    /* invite a teammate: the backend creates the account with a temporary password (no email delivery yet) */
+    invite: function(email, acc){
+      var pw = tempPass();
+      return api('POST', '/api/team/members', {
+        name: String(email).split('@')[0], email: email, password: pw, role: 'CONTRIBUTOR'
+      }).then(function(r){
+        if(r.error){
+          if(acc && acc.team){
+            acc.team = acc.team.filter(function(m){ return String(m.email).toLowerCase() !== String(email).toLowerCase(); });
+            if(window.LIVE) window.LIVE.save();
+          }
+          if(window.mToast) mToast(r.error);
+          return r;
+        }
+        note('<b>' + esc(email) + '</b> now has an account in this workspace.<br>Temporary password: <code style="font-size:15px;user-select:all">' + esc(pw) + '</code><br><span style="opacity:.7">Send it to them — they sign in with it.</span>');
+        return r;
+      });
+    },
+    /* settings saved              ({ org, handles }, account)   -> anything | { error }    */
+    saveSettings: function(s){
+      var org = clean(s && s.org);
+      if(!org) return null;
+      return api('PATCH', '/api/workspace', { name: org });
+    },
+    /* payment (Stripe) is not set up yet -> registration continues without payment */
+    checkout: null,
+    changePlan: null,
+    contactSales: null,
+    /* Video Ideas → Generate      ({ campaign, count, goal, audience, product, avoid }, account) */
+    generateIdeas: function(b){
+      if(!clean(b.campaign) || !clean(b.goal)) return { error: 'Fill in the campaign and the goal first.' };
+      var n = parseInt(b.count, 10);
+      return api('POST', '/api/ideas', {
+        campaign: clean(b.campaign), goal: clean(b.goal), audience: clean(b.audience),
+        product: clean(b.product), constraints: clean(b.avoid), count: (n >= 1 && n <= 30) ? n : undefined
+      }).then(function(r){
+        if(r.error) return r;
+        return { ideas: (r.ideas || []).map(function(i){
+          return { title: i.title, why: [i.concept, i.hook ? 'Hook: ' + i.hook : ''].filter(Boolean).join(' '), pattern: (i.basedOnPatterns || [])[0] || '' };
+        }) };
+      });
+    }
+  };
+})();
 </script>
 <style id="ws-prod-css">
 .m-invite{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
